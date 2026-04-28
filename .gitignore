@@ -1,0 +1,15 @@
+.DS_Store
+
+.references*
+.sketch*
+Customers/**
+!Customers/.gitkeep
+.internal/**
+assets/*
+preview_build*
+!assets/README.md
+.kiro/settings/mcp.json
+
+# Working folder — only track sample
+working/*/
+!working/sample/

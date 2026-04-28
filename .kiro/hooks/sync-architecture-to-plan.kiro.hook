@@ -1,0 +1,14 @@
+{
+  "name": "Sync Architecture to Assessment",
+  "version": "1.0.0",
+  "description": "When a customer architecture working doc is updated, prompt to regenerate the consolidated assessment.",
+  "enabled": true,
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["working/**/*-Architecture.md"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "An architecture working doc was just updated. Check if any Technical Decisions changed status. If so, remind the user to regenerate the consolidated detailed assessment using the Step 5 prompt from their engagement.md."
+  }
+}
