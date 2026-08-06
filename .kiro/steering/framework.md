@@ -70,9 +70,26 @@ When asked to create a new engagement for a customer, follow these steps:
        meetings/
      400-mod-plan/
    ```
-4. Ask the user for the engagement type:
-   - Full (100→400): keep all phases in engagement.md
-   - Front-loaded EBA: mark Phase 100 and 200 as ⏭️ Skipped
-   - Assessment only: mark Phase 400 as ⏭️ Skipped
+4. Ask the user for the engagement type using these contextual questions (not phase numbers):
+
+   > To set up this engagement correctly, I need to understand where you're starting from:
+   >
+   > **A) Customer already has 1–2 candidate applications in mind** — they know which apps to modernize and want to get started quickly. We skip portfolio analysis and go straight into detailed assessment and planning.
+   > → *Front-loaded EBA* — Phases 100 & 200 skipped, start at Phase 300 Path B. Recommend running ATX Comprehensive Codebase Analysis on each candidate app immediately.
+   >
+   > **B) Customer has a portfolio of applications and needs help deciding which to modernize first** — they need an inventory, feasibility scoring, and prioritized wave plan before diving into specific apps.
+   > → *Full engagement (100→400)* — All phases active, start at Phase 100 with portfolio inventory.
+   >
+   > **C) Customer wants an assessment and recommendations but isn't ready to commit to execution plans yet** — they want to understand the landscape, complexity, and options before planning.
+   > → *Assessment only* — Phase 400 skipped, start at Phase 100.
+   >
+   > Which situation best describes {CUSTOMER}?
+
+   Wait for the user's answer before proceeding.
+
+   Mapping:
+   - Answer A → Front-loaded EBA: mark Phase 100 and 200 as ⏭️ Skipped
+   - Answer B → Full (100→400): keep all phases active
+   - Answer C → Assessment only: mark Phase 400 as ⏭️ Skipped
 5. Apply the engagement type to the Progress table in engagement.md.
 6. Guide the user on next steps — explain which phase to start with based on the engagement type, point them to the relevant prompt in `engagement.md`, and mention any reference materials they should prepare (e.g., application inventory for Phase 100).

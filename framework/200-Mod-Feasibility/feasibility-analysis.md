@@ -133,6 +133,32 @@ This step runs BEFORE complexity scoring because tool eligibility directly affec
 - A C# .NET Framework 4.x Class Library is low complexity if AWS Transform can port it automatically.
 - An ASP.NET WebForms app is moderate complexity if AWS Transform can convert it to Blazor, but high complexity if it uses 3rd party UI components (Telerik, DevExpress, Infragistics, etc.) that block Transform.
 
+### Accelerator: ATX Comprehensive Codebase Analysis
+
+For engagements where candidate applications are already identified (front-loaded EBA, assessment-only, or small portfolios ≤ 5 apps), run the `AWS/comprehensive-codebase-analysis` managed transformation on each candidate before scoring complexity. This produces:
+- Technical debt report with prioritized findings by severity
+- Architectural documentation with dependency graphs and service interaction patterns
+- Business logic extraction in plain language
+- Code analysis with complexity metrics and refactoring opportunities
+
+Use this output as **primary evidence** for:
+- Identifying specific ATX blockers (3rd party UI components, unsupported patterns) with precision rather than inventory-level guesses
+- Overriding base complexity scores with measured metrics (actual LOC, actual dependency counts, actual architectural coupling)
+- Pre-populating Phase 300 questionnaire answers and architecture working documents
+- Building the business case with stakeholders using extracted business logic
+
+**How to run:**
+
+Copy `framework/200-Mod-Feasibility/assets/atxconfig-coda.yaml` to `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`, then execute:
+
+```
+atx custom def exec -t -n AWS/comprehensive-codebase-analysis -g file://atxconfig-coda.yaml -p /path/to/repository
+```
+
+Runtime: 45 minutes to 2+ hours per application. Save the output alongside the feasibility assessment in `working/{CUSTOMER}/200-mod-feasibility/`.
+
+If this accelerator is used, note it in the output as "✅ ATX Codebase Analysis available" per application, and reference specific findings from the analysis report when assigning complexity scores and pathway recommendations.
+
 ---
 
 ## Step 3: Technical Complexity Scoring

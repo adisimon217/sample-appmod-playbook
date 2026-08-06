@@ -79,6 +79,25 @@ and #File:working/{CUSTOMER}/200-mod-feasibility/{CUSTOMER}-Feasibility.md.
 Output as working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-{APP}-Questionnaire.md.
 ```
 
+**Pre-populate using ATX Comprehensive Codebase Analysis output (recommended):**
+
+If `AWS/comprehensive-codebase-analysis` was run in Phase 200 or as an EBA prerequisite, the output provides high-confidence answers for many questionnaire sections (architecture, dependencies, code quality, DB access patterns, integration points). Use it as primary source:
+
+```
+Pre-populate #File:framework/300-Detailed-Assessment/300-App-Questionnaire.md
+for {APP_NAME} using:
+- #File:working/{CUSTOMER}/200-mod-feasibility/{APP_NAME}-codebase-analysis/ (all output files)
+- #File:working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx
+- #File:working/{CUSTOMER}/200-mod-feasibility/{CUSTOMER}-Feasibility.md
+
+Mark answers derived from codebase analysis with 📋 (carried forward from analysis).
+Mark remaining gaps with ⚠️ for customer follow-up.
+
+Output as working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-{APP}-Questionnaire.md.
+```
+
+When codebase analysis output is available, expect significantly fewer ⚠️ gaps — the analysis provides measured complexity metrics, actual dependency maps, specific 3rd party component identification, and business logic descriptions that would otherwise require customer interviews.
+
 Walk the customer through each questionnaire. Focus on ⚠️ items and blanks. Let them complete async over 1–2 weeks.
 
 ## Step 2 — Generate the initial consolidated assessment
@@ -168,8 +187,9 @@ The finalized assessment feeds into [Phase 400 — Modernization Plan](../400-Mo
 Skip step 1. Use the questionnaire as-is:
 
 1. Copy `300-App-Questionnaire.md` → `working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-{APP}-Questionnaire.md` (per app)
-2. Walk the customer through each, let them complete async
-3. Follow steps 2–5 above
+2. (Recommended) Run `AWS/comprehensive-codebase-analysis` on each candidate application and save output to `working/{CUSTOMER}/200-mod-feasibility/{APP-NAME}-codebase-analysis/`. Use the output to pre-populate questionnaire answers where possible, reducing customer interview time.
+3. Walk the customer through each questionnaire (focus on ⚠️ gaps not covered by codebase analysis), let them complete async
+4. Follow steps 2–5 above
 
 ## Appendix — Field Mapping (Phase 100/200 → Questionnaire)
 

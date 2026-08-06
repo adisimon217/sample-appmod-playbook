@@ -1,0 +1,24 @@
+additionalPlanContext: |
+  Produce a knowledge base optimized for both legacy documentation AND forward-engineering input to spec-driven development (Kiro IDE).
+
+  README.md: table of contents linking all output files. No broken links. Every link must point directly to a specific .md file (e.g. diagrams/structural/components.md), never to a folder path or index file. Validate every link resolves to an actual generated file.
+
+  Structure:
+  1. Executive Summary: app name, tech stack table, LOC by language/module, architecture style, modernization readiness (1-10), top 5 risks
+  2. Architecture: Mermaid C4 context diagram, component diagram with data flows, deployment topology. Portrait orientation, validated syntax.
+  3. Domain Model: ER diagram from code (ORM models, DTOs, entities). Bounded contexts. Aggregate roots.
+  4. Database - Schema: tables, FKs, views, functions, triggers, cross-DB references (from exported DDL if available)
+  5. Database - Stored Procedures/Functions (CRITICAL - analyze in depth):
+     - Classify EVERY SP/function: CRUD (replace with ORM), Business Logic (extract to app code), Reporting (views/materialized views), ETL (batch processing), Utility (drop)
+     - Summary table: category, count, total lines, migration approach
+     - For each Business Logic SP: plain-language description, business rules enforced, tables touched, call chain, app entry points, migration-complicating patterns (cursors, dynamic SQL, temp tables, recursive queries, cross-DB joins, platform-specific features)
+     - Top 10 most complex SPs: full description, business rules as extractable requirements, recommended migration strategy
+  6. Functional Requirements as user stories grouped into Epics > Features > Stories. Format: FR-{N}.{M}.{P}: As a {role}, I want {action}, so that {benefit}. Include acceptance criteria, business rules, source reference.
+  7. Non-Functional Requirements: NFR-PERF, NFR-SEC, NFR-REL, NFR-SCALE, NFR-DATA, NFR-INT. Each with ID.
+  8. API/Interface Inventory: HTTP endpoints, SOAP/RPC ops, queues, scheduled jobs, file imports/exports. Note callers and dependencies.
+  9. Tech Debt & Blockers: CRITICAL/HIGH/MEDIUM/LOW by modernization impact. File/location, why it matters, remediation.
+  10. Dependencies: all packages/libraries (flag deprecated or incompatible with target platform), external services, internal cross-app deps
+  11. Forward Engineering: target architecture (Mermaid + AWS services), bounded contexts, modernization sequence, port-as-is vs reimagine decisions
+
+  All diagrams: Mermaid, portrait layout, validated syntax. ASCII for tree structures only.
+  All requirements: traceable IDs, source code references, Given/When/Then acceptance criteria where possible.

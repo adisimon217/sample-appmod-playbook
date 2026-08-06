@@ -28,7 +28,7 @@ When creating a new customer engagement:
 5. Links using `#File:framework/...` or `#Folder:working/{CUSTOMER}/...` syntax are already absolute and don't need adjustment
 6. Copy the blank inventory template: `framework/100-Data-Collection/100-App-Inventory.xlsx` → `working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx`
 7. Scaffold empty subfolders with .gitkeep: `reference/`, `300-detailed-assessment/meetings/`
-8. Ask the engagement type and mark skipped phases accordingly
+8. Ask the engagement type using contextual questions (see `framework.md` steering for the full prompt with hints A/B/C) and mark skipped phases accordingly
 
 Output paths follow this pattern:
 - `working/{CUSTOMER}/100-data-collection/` — inventory
