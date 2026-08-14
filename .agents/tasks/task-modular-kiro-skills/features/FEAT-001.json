@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "refactor",
   "description": "Create the core engagement initiation skill that replaces the initiation logic currently split between framework.md steering, workspace-rules.md steering, and the root README prompt. This skill handles: creating a new customer engagement folder, copying templates, asking engagement type questions, and scaffolding the workspace. Also consolidate the steering files - remove initiation logic from framework.md and workspace-rules.md (keeping only passive context), and remove phase-300.md (its logic moves into the Phase 300 skill).",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Create .kiro/skills/start-engagement/SKILL.md with YAML frontmatter (name: start-engagement, description about starting new customer modernization engagements). The workflow should include: Step 1 - Get customer name, Step 2 - Create folder structure (working/{CUSTOMER}/ with all subfolders), Step 3 - Copy engagement-template.md replacing {CUSTOMER} placeholders, Step 4 - Copy phase READMEs into customer folders adjusting relative links, Step 5 - Copy blank inventory template, Step 6 - Ask engagement type (A/B/C questions from current framework.md steering), Step 7 - Apply engagement type to progress table, Step 8 - Guide user on next steps and which skill to invoke next.",
     "Refactor .kiro/steering/framework.md: Remove the 'Engagement Initiation' section (steps 1-6 with the A/B/C questions) since that logic now lives in the start-engagement skill. Keep the framework overview, phases table, workspace structure, and key conventions sections as passive context.",
@@ -27,5 +27,5 @@
     "Confirm README.md references start-engagement skill"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "All acceptance criteria met. The start-engagement skill consolidates engagement initiation logic from framework.md and workspace-rules.md. Also updated the Key Conventions bullet in framework.md to reference the skill instead of the old initiation prompt approach."
 }
