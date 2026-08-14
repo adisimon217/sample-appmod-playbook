@@ -10,7 +10,7 @@
   Inputs:
   - Phase 300 consolidated assessment (working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-Detailed-Assessment.md)
   - Architecture working doc (working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-{APP}-Architecture.md)
-  - [Detailed Analysis Rules](../../300-Detailed-Assessment/detailed-analysis.md) — decision matrices
+  - [Detailed Analysis Rules](../../detailed-assessment/references/detailed-analysis.md) — decision matrices
   - [EBA Preparation Checklist](EBA-Preparation-Checklist.md)
 
   Principles:
