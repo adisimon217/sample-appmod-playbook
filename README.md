@@ -49,11 +49,26 @@ working/                          # Per-customer work. All modifications happen 
     400-mod-plan/                 # PoC plans, EBA plans, project plans
 ```
 
+## Available Skills
+
+Skills are the primary way to interact with this framework. Each skill guides you through a specific phase with step-by-step instructions, referencing the correct templates and producing outputs in the right locations.
+
+| Skill | Phase | Description |
+|-------|-------|-------------|
+| `start-engagement` | Setup | Create the working folder structure, copy templates, determine engagement type |
+| `data-collection` | 100 | Guide portfolio inventory collection using the App Inventory spreadsheet |
+| `feasibility-analysis` | 200 | Classify, score, and prioritize applications into modernization waves |
+| `detailed-assessment` | 300 | Per-application deep dive: questionnaires, architecture workshops, iterative refinement |
+| `generate-plans` | 400 | Produce PoC, EBA, and full modernization project plans for all applications |
+| `excel-analysis` | Utility | Read and analyze Excel spreadsheets (used by other skills for inventory data) |
+
+Invoke any skill by name (e.g., "run the data-collection skill" or "invoke generate-plans"). Skills are designed to be invoked in sequence, but each can also be run independently if prerequisites are met.
+
 ## Getting Started
 
 To start a new customer engagement, invoke the `start-engagement` skill and provide the customer name. The skill will create the folder structure, copy templates, ask about the engagement type, and guide you on next steps.
 
-Once the engagement is set up, open `working/{CUSTOMER}/engagement.md` and follow the phase instructions.
+Once the engagement is set up, invoke skills in order: `data-collection` -> `feasibility-analysis` -> `detailed-assessment` -> `generate-plans`. Each skill picks up where the previous one left off.
 
 ## Target State
 

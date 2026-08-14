@@ -23,12 +23,26 @@ Update status as you go: ⬜ Not started → 🔄 In progress → ✅ Done → �
 
 ---
 
-## Phase Instructions
+## How to Use
 
-Detailed instructions for each phase are in the phase README files in this folder:
+**Invoke Kiro skills** to progress through each phase. Skills are the primary way to interact with this framework - they guide you step by step, reference the correct templates, and produce outputs in the right locations.
+
+| Phase | Skill to invoke | What it does |
+|-------|----------------|--------------|
+| Setup | `start-engagement` | Creates folder structure and this file |
+| 100 | `data-collection` | Guides portfolio inventory collection |
+| 200 | `feasibility-analysis` | Classifies, scores, and prioritizes applications |
+| 300 | `detailed-assessment` | Per-app deep dive, questionnaires, and architecture workshops |
+| 400 | `generate-plans` | Produces PoC, EBA, and full project plans |
+
+Invoke skills by name (e.g., "run the data-collection skill" or "invoke feasibility-analysis"). Each skill picks up where the previous one left off.
+
+## Phase Instructions (Reference)
+
+The framework README files provide additional context on each phase:
 - [100-data-collection/README.md](100-data-collection/README.md)
 - [200-mod-feasibility/README.md](200-mod-feasibility/README.md)
 - [300-detailed-assessment/README.md](300-detailed-assessment/README.md)
 - [400-mod-plan/README.md](400-mod-plan/README.md)
 
-Each README contains the prompts, artefact references, and workflow for that phase. Follow them in order.
+These contain the underlying prompts and rules. The skills above wrap these into guided workflows.
