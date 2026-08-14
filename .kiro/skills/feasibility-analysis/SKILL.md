@@ -84,6 +84,8 @@ For each CAT1 and CAT2 application, check eligibility against the rules in `fram
 
 If the AWS Knowledge MCP Server is available, verify the latest AWS Transform capabilities by searching for current eligibility criteria. Override the static rules where the latest documentation differs.
 
+If the AWS Knowledge MCP Server is not available, proceed with the static rules in `framework/200-Mod-Feasibility/210-Tool-Feasibility/aws-tools-analysis.md` as-is and note to the user that eligibility criteria should be verified against current AWS documentation before finalizing recommendations.
+
 Present the eligibility matrix to the user.
 
 #### Step 4c - Technical complexity scoring
