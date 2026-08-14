@@ -29,29 +29,15 @@ Add `.gitkeep` files to empty folders: `reference/` and `300-detailed-assessment
 
 ### Step 3 - Copy engagement template
 
-Copy `framework/engagement-template.md` to `working/{CUSTOMER}/engagement.md`.
+Copy `references/engagement-template.md` to `working/{CUSTOMER}/engagement.md`.
 
 Replace all `{CUSTOMER}` placeholders in the file with the actual customer name.
 
-### Step 4 - Copy phase READMEs
+### Step 4 - Copy blank inventory template
 
-Copy each phase README into the customer folder:
+Copy `.kiro/skills/data-collection/references/100-App-Inventory.xlsx` to `working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx`.
 
-- `framework/100-Data-Collection/README.md` to `working/{CUSTOMER}/100-data-collection/README.md`
-- `framework/200-Mod-Feasibility/README.md` to `working/{CUSTOMER}/200-mod-feasibility/README.md`
-- `framework/300-Detailed-Assessment/README.md` to `working/{CUSTOMER}/300-detailed-assessment/README.md`
-- `framework/400-Mod-Plan/README.md` to `working/{CUSTOMER}/400-mod-plan/README.md`
-
-In each copied README:
-- Replace `{CUSTOMER}` with the actual customer name.
-- Adjust relative links to framework artefacts so they point back to the framework location from the customer folder (e.g., a link like `(300-App-Questionnaire.md)` becomes `(../../../framework/300-Detailed-Assessment/300-App-Questionnaire.md)`).
-- Links using `#File:framework/...` or `#Folder:working/{CUSTOMER}/...` syntax are already workspace-root-relative and do not need adjustment.
-
-### Step 5 - Copy blank inventory template
-
-Copy `framework/100-Data-Collection/100-App-Inventory.xlsx` to `working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx`.
-
-### Step 6 - Ask engagement type
+### Step 5 - Ask engagement type
 
 Present the user with the following engagement type question:
 
@@ -70,7 +56,7 @@ Present the user with the following engagement type question:
 
 Wait for the user's answer before proceeding.
 
-### Step 7 - Apply engagement type to progress table
+### Step 6 - Apply engagement type to progress table
 
 Update the Progress table in `working/{CUSTOMER}/engagement.md` based on the user's answer:
 
@@ -78,7 +64,7 @@ Update the Progress table in `working/{CUSTOMER}/engagement.md` based on the use
 - **Answer B (Full engagement):** Keep all phases as "Not started". Set engagement type field to "Full (100 to 400)".
 - **Answer C (Assessment only):** Mark Phase 400 as `Skipped`. Set engagement type field to "Assessment only".
 
-### Step 8 - Guide user on next steps
+### Step 7 - Guide user on next steps
 
 Based on the engagement type, explain which phase to start with and point the user to the relevant section in `working/{CUSTOMER}/engagement.md`:
 

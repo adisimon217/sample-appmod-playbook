@@ -27,7 +27,7 @@ Read the consolidated assessment and all architecture working docs to understand
 - The status of all technical decisions (AGREED, EXPLORING, DEFERRED)
 - Cross-application dependencies and shared concerns
 
-Also read the analysis rules from `framework/300-Detailed-Assessment/detailed-analysis.md` for context on the decision criteria.
+Also read the analysis rules from `.kiro/skills/detailed-assessment/references/detailed-analysis.md` for context on the decision criteria.
 
 ### Step 2 - Classify applications by execution path
 
@@ -43,8 +43,8 @@ From the consolidated assessment, build a plan generation matrix:
 
 | Type | When to assign | Duration | Template |
 |------|---------------|----------|----------|
-| PoC | Decisions marked EXPLORING that need validation before committing | 1-2 weeks | `framework/400-Mod-Plan/420-PoC/PoC-Plan-Template.md` |
-| EBA | < 100K LoC, ATX eligible, isolated, manageable complexity | 6 weeks | `framework/400-Mod-Plan/430-EBA/EBA-Plan-Template.md` |
+| PoC | Decisions marked EXPLORING that need validation before committing | 1-2 weeks | `references/PoC-Plan-Template.md` |
+| EBA | < 100K LoC, ATX eligible, isolated, manageable complexity | 6 weeks | `references/EBA-Plan-Template.md` |
 | Full project | > 100K LoC, heavy rewrite, ASMX with many consumers, 0% tests | Varies | Phased delivery (no fixed template) |
 
 **Cross-cutting PoCs:** If multiple applications share the same EXPLORING decision (e.g., gMSA authentication), create a single PoC plan that covers all affected apps rather than duplicating the PoC per app.
@@ -65,9 +65,9 @@ Wait for user confirmation before proceeding.
 
 ### Step 3 - Generate PoC plans
 
-For each topic/decision that needs a PoC, generate a plan using the template at `framework/400-Mod-Plan/420-PoC/PoC-Plan-Template.md`.
+For each topic/decision that needs a PoC, generate a plan using the template at `references/PoC-Plan-Template.md`.
 
-Use the sample at `framework/400-Mod-Plan/420-PoC/sample-output/ADC-PoC-gMSA-Auth.md` as a reference for quality, detail level, and structure.
+Use the sample at `references/sample-output/ADC-PoC-gMSA-Auth.md` as a reference for quality, detail level, and structure.
 
 For each PoC plan:
 1. Define the hypothesis clearly (one sentence stating what needs to be proven)
@@ -86,9 +86,9 @@ Output each PoC plan as: `working/{CUSTOMER}/400-mod-plan/{CUSTOMER}-PoC-{TOPIC}
 
 ### Step 4 - Generate EBA plans
 
-For each application recommended for EBA, generate a full 6-week execution plan using the template at `framework/400-Mod-Plan/430-EBA/EBA-Plan-Template.md`.
+For each application recommended for EBA, generate a full 6-week execution plan using the template at `references/EBA-Plan-Template.md`.
 
-Use the sample at `framework/400-Mod-Plan/430-EBA/sample-output/ADC-Supplier-Portal-EBA-Plan.md` as a reference for quality, detail level, and structure.
+Use the sample at `references/sample-output/ADC-Supplier-Portal-EBA-Plan.md` as a reference for quality, detail level, and structure.
 
 For each EBA plan:
 1. Pull the application profile, modernization approach, and target architecture from the consolidated assessment and architecture working doc
@@ -174,7 +174,7 @@ Present the dependency map to the user:
 
 ### Step 7 - Post-generation: EBA Preparation Checklist
 
-For each application with an EBA plan, walk the user through the EBA Preparation Checklist at `framework/400-Mod-Plan/430-EBA/EBA-Preparation-Checklist.md`.
+For each application with an EBA plan, walk the user through the EBA Preparation Checklist at `references/EBA-Preparation-Checklist.md`.
 
 The checklist covers four phases of readiness:
 1. **Application Data Gathering** - Questionnaire validation, source access, assessment tools run

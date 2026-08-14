@@ -1,6 +1,6 @@
 ---
 inclusion: fileMatch
-fileMatchPattern: "{framework/400-Mod-Plan/**,working/*/400-mod-plan/**,working/*/300-detailed-assessment/**}"
+fileMatchPattern: "{.kiro/skills/generate-plans/references/**,working/*/400-mod-plan/**,working/*/300-detailed-assessment/**}"
 ---
 
 # .NET Modernization on AWS — Authentication, Session, and Data Protection

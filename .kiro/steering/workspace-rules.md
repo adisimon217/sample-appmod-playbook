@@ -4,11 +4,11 @@ inclusion: always
 
 # Workspace Rules
 
-## Framework protection
+## Skill references protection
 
-Files under `framework/` are read-only reference material. Never modify, delete, or overwrite files in the `framework/` folder during customer work. Always read from `framework/` and write to `working/`.
+Files under `.kiro/skills/*/references/` are read-only reference material. Never modify, delete, or overwrite files in any skill's `references/` folder during customer work. Always read from `references/` and write to `working/`.
 
-When prompts reference framework files (templates, analysis rules, samples), use them as inputs but produce outputs only in the `working/{CUSTOMER}/` folder.
+When skills reference templates, analysis rules, or samples from their `references/` folder, use them as inputs but produce outputs only in the `working/{CUSTOMER}/` folder.
 
 ## Working folder conventions
 

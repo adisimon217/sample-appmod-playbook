@@ -329,7 +329,7 @@ The `AWS/comprehensive-codebase-analysis` managed transformation provides AI-pow
 
 **How to run:**
 
-1. Copy the configuration file from `framework/200-Mod-Feasibility/assets/atxconfig-coda.yaml` into the customer working folder (e.g., `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`). Customize the `additionalPlanContext` if you need the analysis to focus on specific areas (e.g., data access patterns, auth usage, cross-database joins).
+1. Copy the configuration file from `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml` into the customer working folder (e.g., `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`). Customize the `additionalPlanContext` if you need the analysis to focus on specific areas (e.g., data access patterns, auth usage, cross-database joins).
 2. **Export database DDLs into the repository** — Before running the analysis, ask the customer to export all SQL Server DDL scripts (tables, views, stored procedures, functions, triggers) into a folder within the repository (e.g., `database/` or `sql/`). This gives the analysis agent full visibility into the data layer alongside the application code, producing more accurate dependency maps, stored procedure call graphs, and data access pattern identification. Use SSMS "Generate Scripts" or a tool like `mssql-scripter` to export:
    ```
    mssql-scripter -S <server> -d <database> -f ./database/ --file-per-object
@@ -346,7 +346,7 @@ atx custom def exec -t -n AWS/comprehensive-codebase-analysis -g file://atxconfi
 - `-g` — path to the config YAML with `additionalPlanContext`
 - `-p` — path to the repository being analyzed
 
-The provided `atxconfig-coda.yaml` (in `framework/200-Mod-Feasibility/assets/`) includes context to produce structured output with a navigable table of contents, functional requirements as user stories grouped into epics/features, Mermaid architecture diagrams (validated for syntax), and tech stack metrics including lines of code.
+The provided `atxconfig-coda.yaml` (in `.kiro/skills/feasibility-analysis/references/`) includes context to produce structured output with a navigable table of contents, functional requirements as user stories grouped into epics/features, Mermaid architecture diagrams (validated for syntax), and tech stack metrics including lines of code.
 
 **Runtime:** minutes to hours depending on codebase size and complexity.
 

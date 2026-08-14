@@ -149,7 +149,7 @@ Use this output as **primary evidence** for:
 
 **How to run:**
 
-Copy `framework/200-Mod-Feasibility/assets/atxconfig-coda.yaml` to `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`, then execute:
+Copy `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml` to `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`, then execute:
 
 ```
 atx custom def exec -t -n AWS/comprehensive-codebase-analysis -g file://atxconfig-coda.yaml -p /path/to/repository

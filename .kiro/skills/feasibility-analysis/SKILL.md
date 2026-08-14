@@ -42,7 +42,7 @@ For engagements where the customer already has candidate applications identified
 >   ```
 >
 > **To run:**
-> 1. Copy `framework/200-Mod-Feasibility/assets/atxconfig-coda.yaml` to `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`
+> 1. Copy `references/atxconfig-coda.yaml` to `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`
 > 2. For each application, execute from `working/{CUSTOMER}/200-mod-feasibility/`:
 >    ```
 >    atx custom def exec -t -n AWS/comprehensive-codebase-analysis -g file://atxconfig-coda.yaml -p <repo-path>
@@ -55,7 +55,7 @@ If the user chooses to run the accelerator, guide them through the steps above. 
 
 ### Step 4 - Execute the feasibility analysis
 
-Read the analysis rules from `framework/200-Mod-Feasibility/feasibility-analysis.md` and the AWS tool eligibility checks from `framework/200-Mod-Feasibility/210-Tool-Feasibility/aws-tools-analysis.md`.
+Read the analysis rules from `references/feasibility-analysis.md` and the AWS tool eligibility checks from `references/aws-tools-analysis.md`.
 
 Execute the analysis in four steps as defined in `feasibility-analysis.md`:
 
@@ -74,7 +74,7 @@ Present the classification table to the user for review.
 
 #### Step 4b - AWS Transform eligibility and modernization pathways
 
-For each CAT1 and CAT2 application, check eligibility against the rules in `framework/200-Mod-Feasibility/210-Tool-Feasibility/aws-tools-analysis.md`:
+For each CAT1 and CAT2 application, check eligibility against the rules in `references/aws-tools-analysis.md`:
 
 - **CHECK 1 - ATX .NET**: GA eligible, Preview eligible, IDE only, or Not eligible
 - **CHECK 2 - ATX SQL**: Eligible, Eligible after .NET porting, Partially eligible, Not applicable, or Not eligible
@@ -84,7 +84,7 @@ For each CAT1 and CAT2 application, check eligibility against the rules in `fram
 
 If the AWS Knowledge MCP Server is available, verify the latest AWS Transform capabilities by searching for current eligibility criteria. Override the static rules where the latest documentation differs.
 
-If the AWS Knowledge MCP Server is not available, proceed with the static rules in `framework/200-Mod-Feasibility/210-Tool-Feasibility/aws-tools-analysis.md` as-is and note to the user that eligibility criteria should be verified against current AWS documentation before finalizing recommendations.
+If the AWS Knowledge MCP Server is not available, proceed with the static rules in `references/aws-tools-analysis.md` as-is and note to the user that eligibility criteria should be verified against current AWS documentation before finalizing recommendations.
 
 Present the eligibility matrix to the user.
 

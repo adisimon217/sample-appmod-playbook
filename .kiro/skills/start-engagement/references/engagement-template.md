@@ -36,13 +36,3 @@ Update status as you go: ⬜ Not started → 🔄 In progress → ✅ Done → �
 | 400 | `generate-plans` | Produces PoC, EBA, and full project plans |
 
 Invoke skills by name (e.g., "run the data-collection skill" or "invoke feasibility-analysis"). Each skill picks up where the previous one left off.
-
-## Phase Instructions (Reference)
-
-The framework README files provide additional context on each phase:
-- [100-data-collection/README.md](100-data-collection/README.md)
-- [200-mod-feasibility/README.md](200-mod-feasibility/README.md)
-- [300-detailed-assessment/README.md](300-detailed-assessment/README.md)
-- [400-mod-plan/README.md](400-mod-plan/README.md)
-
-These contain the underlying prompts and rules. The skills above wrap these into guided workflows.

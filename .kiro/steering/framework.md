@@ -4,33 +4,42 @@ inclusion: always
 
 # ModNet Framework — Windows (.NET & SQL Server) Modernization on AWS
 
-Structured modernization framework for AWS partners. Two top-level folders:
+Structured modernization framework for AWS partners. Skills contain their own reference material (templates, rules, samples) in their `references/` subfolder. All customer-specific outputs go in `working/`.
 
-- `framework/` — read-only reference material (templates, rules, samples). Never modified per-customer.
-- `working/` — per-customer work. All outputs go here.
+## Skills
 
-## Framework Phases
+| Skill | Phase | References |
+|-------|-------|------------|
+| `start-engagement` | Setup | `references/engagement-template.md` |
+| `data-collection` | 100 | `references/100-App-Inventory.xlsx` |
+| `feasibility-analysis` | 200 | `references/feasibility-analysis.md`, `references/aws-tools-analysis.md`, `references/atxconfig-coda.yaml` |
+| `detailed-assessment` | 300 | `references/300-App-Questionnaire.md`, `references/detailed-analysis.md`, `references/300-Architecture.md` |
+| `generate-plans` | 400 | `references/PoC-Plan-Template.md`, `references/EBA-Plan-Template.md`, `references/EBA-Preparation-Checklist.md` |
+| `excel-analysis` | Utility | (no references) |
 
-| Phase | What happens | Framework docs |
-|-------|-------------|---------------|
-| 100 — Data Collection | Portfolio inventory | `framework/100-Data-Collection/` |
-| 200 — Mod Feasibility | Classify, score, prioritize, wave plan | `framework/200-Mod-Feasibility/` |
-| 300 — Detailed Assessment & Architecture | Per-app questionnaire, collaborative architecture, consolidated assessment | `framework/300-Detailed-Assessment/` |
-| 400 — Mod Plan | PoC plans, EBA plans, full project plans | `framework/400-Mod-Plan/` |
+Each skill's `references/` folder contains the templates, analysis rules, and sample outputs it needs. Skills reference their own files with relative paths (e.g., `references/feasibility-analysis.md`). When a skill needs another skill's reference file, it uses the full workspace path (e.g., `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml`).
 
 ## Workspace Structure
 
 ```
-framework/                        # Read-only. Templates, rules, samples.
-  100-Data-Collection/
-  200-Mod-Feasibility/
-    210-Tool-Feasibility/
-  300-Detailed-Assessment/
-  400-Mod-Plan/
-    410-Accelerators/
-    420-PoC/
-    430-EBA/
-  engagement-template.md
+.kiro/skills/                     # Skills with embedded reference material
+  start-engagement/
+    SKILL.md
+    references/
+  data-collection/
+    SKILL.md
+    references/
+  feasibility-analysis/
+    SKILL.md
+    references/
+  detailed-assessment/
+    SKILL.md
+    references/
+  generate-plans/
+    SKILL.md
+    references/
+  excel-analysis/
+    SKILL.md
 
 working/                          # Per-customer work.
   {CUSTOMER}/
@@ -47,9 +56,8 @@ working/                          # Per-customer work.
 
 ## Key Conventions
 
-- `framework/` is never modified during customer work — read from it, write to `working/`
+- Skill reference files (`.kiro/skills/*/references/`) are read-only reference material - never modified during customer work
 - Each customer engagement starts by invoking the `start-engagement` skill
-- The `engagement.md` in each customer folder is the primary interface — all prompts with paths pre-filled
-- Phase 200 prompts read the Excel inventory directly (excel-analysis skill) — no CSV export
+- The `engagement.md` in each customer folder is the primary interface - all prompts with paths pre-filled
+- Phase 200 prompts read the Excel inventory directly (excel-analysis skill) - no CSV export
 - All modernization plans should be decisive: one recommended approach per decision point
-

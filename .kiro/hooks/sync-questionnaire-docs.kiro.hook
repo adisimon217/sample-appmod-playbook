@@ -5,10 +5,10 @@
   "enabled": true,
   "when": {
     "type": "fileEdited",
-    "patterns": ["framework/300-Detailed-Assessment/300-App-Questionnaire.md"]
+    "patterns": [".kiro/skills/detailed-assessment/references/300-App-Questionnaire.md"]
   },
   "then": {
     "type": "askAgent",
-    "prompt": "The questionnaire at framework/300-Detailed-Assessment/300-App-Questionnaire.md was just modified. Review the changes and update framework/300-Detailed-Assessment/detailed-analysis.md accordingly: add/update/remove rows in section tables to match question changes, update Q# references, and keep decision matrices consistent."
+    "prompt": "The questionnaire at .kiro/skills/detailed-assessment/references/300-App-Questionnaire.md was just modified. Review the changes and update .kiro/skills/detailed-assessment/references/detailed-analysis.md accordingly: add/update/remove rows in section tables to match question changes, update Q# references, and keep decision matrices consistent."
   }
 }

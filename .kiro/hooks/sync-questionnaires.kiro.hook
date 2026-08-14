@@ -5,10 +5,10 @@
   "enabled": true,
   "when": {
     "type": "fileEdited",
-    "patterns": ["framework/300-Detailed-Assessment/300-App-Questionnaire.md"]
+    "patterns": [".kiro/skills/detailed-assessment/references/300-App-Questionnaire.md"]
   },
   "then": {
     "type": "askAgent",
-    "prompt": "The master questionnaire template was modified. Propagate structural changes to all customer questionnaires in working/*/300-detailed-assessment/*-Questionnaire.md. Update question structure and wording while preserving customer-specific answers."
+    "prompt": "The master questionnaire template at .kiro/skills/detailed-assessment/references/300-App-Questionnaire.md was modified. Propagate structural changes to all customer questionnaires in working/*/300-detailed-assessment/*-Questionnaire.md. Update question structure and wording while preserving customer-specific answers."
   }
 }

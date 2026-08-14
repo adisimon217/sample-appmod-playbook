@@ -21,37 +21,9 @@ graph TD
     style P4 fill:#2d6a4f,stroke:#1b4332,color:#fff
 ```
 
-| Phase | What happens | Framework docs |
-|:-----:|-------------|---------------|
-| 100 | Portfolio inventory | [README](framework/100-Data-Collection/README.md) |
-| 200 | Classify, score, prioritize | [README](framework/200-Mod-Feasibility/README.md) |
-| 300 | Per-app deep dive + architecture | [README](framework/300-Detailed-Assessment/README.md) |
-| 400 | PoC, EBA, and project plans | [README](framework/400-Mod-Plan/README.md) |
-
-## Workspace Structure
-
-```
-framework/                        # Read-only. Templates, rules, samples. Never modified per-customer.
-  100-Data-Collection/            # Inventory template
-  200-Mod-Feasibility/            # Feasibility analysis rules and sample output
-  300-Detailed-Assessment/        # Questionnaire, analysis rules, architecture template, samples
-  400-Mod-Plan/                   # PoC template, EBA template + checklist, samples
-  engagement-template.md          # Template for customer engagement runbook
-
-working/                          # Per-customer work. All modifications happen here.
-  {CUSTOMER}/
-    engagement.md                 # The runbook — prompts, status, links
-    reference/                    # Customer-provided artefacts
-    100-data-collection/          # Completed inventory
-    200-mod-feasibility/          # Feasibility output
-    300-detailed-assessment/      # Questionnaires, architecture docs, assessment
-      meetings/                   # Raw meeting notes
-    400-mod-plan/                 # PoC plans, EBA plans, project plans
-```
-
 ## Available Skills
 
-Skills are the primary way to interact with this framework. Each skill guides you through a specific phase with step-by-step instructions, referencing the correct templates and producing outputs in the right locations.
+Skills are the primary way to interact with this framework. Each skill guides you through a specific phase with step-by-step instructions. Templates, analysis rules, and sample outputs are embedded in each skill's `references/` folder.
 
 | Skill | Phase | Description |
 |-------|-------|-------------|
@@ -83,12 +55,12 @@ Once the engagement is set up, invoke skills in order: `data-collection` -> `fea
 
 | Tool | Role |
 |------|------|
-| [AWS Transform for .NET](https://docs.aws.amazon.com/transform/latest/userguide/dotnet.html) | .NET Framework → cross-platform .NET |
-| [AWS Transform for SQL Server](https://docs.aws.amazon.com/transform/latest/userguide/sql-server-modernization.html) | SQL Server → Aurora PostgreSQL |
-| [AWS Transform Custom](https://docs.aws.amazon.com/transform/latest/userguide/custom.html) | Web Forms → MVC, repeatable patterns at scale |
+| [AWS Transform for .NET](https://docs.aws.amazon.com/transform/latest/userguide/dotnet.html) | .NET Framework to cross-platform .NET |
+| [AWS Transform for SQL Server](https://docs.aws.amazon.com/transform/latest/userguide/sql-server-modernization.html) | SQL Server to Aurora PostgreSQL |
+| [AWS Transform Custom](https://docs.aws.amazon.com/transform/latest/userguide/custom.html) | Web Forms to MVC, repeatable patterns at scale |
 | [Kiro](https://kiro.dev/docs/) | AI IDE for analysis, porting, and complex rewrites |
 
-Note: This playbook is meant to be a reference guide — not intended for production use.
+Note: This playbook is meant to be a reference guide - not intended for production use.
 
 ## License
 

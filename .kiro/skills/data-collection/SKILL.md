@@ -34,8 +34,8 @@ Wait for the user's answer before proceeding.
 
 #### Option A - Customer fills from scratch
 
-1. Confirm the blank template exists at `working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx` (copied during engagement setup from `framework/100-Data-Collection/100-App-Inventory.xlsx`).
-2. If it does not exist, copy `framework/100-Data-Collection/100-App-Inventory.xlsx` to `working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx`.
+1. Confirm the blank template exists at `working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx` (copied during engagement setup from `references/100-App-Inventory.xlsx`).
+2. If it does not exist, copy `references/100-App-Inventory.xlsx` to `working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx`.
 3. Advise the user to send the spreadsheet to the customer with these instructions:
    - Fill one row per application in the Applications sheet (22 columns covering type, .NET version, hosting, dependencies, LOC, criticality, RTO/RPO)
    - Fill one row per database in the Databases sheet (19 columns covering SQL Server version/edition, size, object counts, HA, features)
@@ -48,7 +48,7 @@ Wait for the user's answer before proceeding.
 1. Confirm reference materials are placed in `working/{CUSTOMER}/reference/`. If not, ask the user to add architecture diagrams, meeting notes, docs, or slides to that folder.
 2. Use the `excel-analysis` skill to work with the inventory spreadsheet.
 3. Read all reference materials in `working/{CUSTOMER}/reference/`.
-4. Read the template structure from `framework/100-Data-Collection/100-App-Inventory.xlsx`.
+4. Read the template structure from `references/100-App-Inventory.xlsx`.
 5. Extract as much information as possible to populate the Applications and Databases sheets:
    - Set Discovery Method to "Customer Interview" for information from meeting notes or slides
    - Set Discovery Method to "Automated Discovery" for information from architecture diagrams or technical documentation
@@ -61,7 +61,7 @@ Wait for the user's answer before proceeding.
 
 1. Ask the user for the repository path(s). These should be placed in `working/{CUSTOMER}/reference/{REPO_NAME}` or the user can provide absolute paths.
 2. Use the `excel-analysis` skill to work with the inventory spreadsheet.
-3. Read the template structure from `framework/100-Data-Collection/100-App-Inventory.xlsx`.
+3. Read the template structure from `references/100-App-Inventory.xlsx`.
 4. For each solution/project found in the source code, extract:
    - Application Type (from project type - .csproj, web.config, etc.)
    - Programming Language (C#, VB.NET, F#, etc.)

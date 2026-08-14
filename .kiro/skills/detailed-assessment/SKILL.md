@@ -51,7 +51,7 @@ Wait for user confirmation before proceeding to Step 3. The user may request dif
 
 ### Step 3 - Pre-populate questionnaires
 
-For each selected application, create a questionnaire from the template at `framework/300-Detailed-Assessment/300-App-Questionnaire.md`.
+For each selected application, create a questionnaire from the template at `references/300-App-Questionnaire.md`.
 
 #### Path A - Pre-populate from Phase 100/200 data
 
@@ -86,7 +86,7 @@ If codebase analysis has not been run but source code is accessible, recommend r
 >
 > Source code is available for {APP_NAME}. Running the comprehensive codebase analysis before questionnaire completion will provide measured metrics (actual LOC, dependency maps, specific blockers) that reduce customer interview time.
 >
-> To run: copy `framework/200-Mod-Feasibility/assets/atxconfig-coda.yaml` to `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml` and execute from that directory:
+> To run: copy `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml` to `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml` and execute from that directory:
 > ```
 > atx custom def exec -t -n AWS/comprehensive-codebase-analysis -g file://atxconfig-coda.yaml -p <repo-path>
 > ```
@@ -96,7 +96,7 @@ If codebase analysis has not been run but source code is accessible, recommend r
 #### Path B - EBA front-loaded (no prior phases)
 
 Copy the blank questionnaire template directly:
-1. Copy `framework/300-Detailed-Assessment/300-App-Questionnaire.md` to `working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-{APP}-Questionnaire.md` for each application.
+1. Copy `references/300-App-Questionnaire.md` to `working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-{APP}-Questionnaire.md` for each application.
 2. If source code is accessible, recommend running ATX Comprehensive Codebase Analysis (same process as above) and use output to pre-populate where possible.
 3. Mark all fields as requiring customer input (no inventory data available to carry forward).
 
@@ -115,7 +115,7 @@ Once questionnaires are returned (or sufficiently complete), generate the consol
 
 **Consolidated assessment generation:**
 
-Read the analysis rules from `framework/300-Detailed-Assessment/detailed-analysis.md`. For each application:
+Read the analysis rules from `references/detailed-analysis.md`. For each application:
 
 1. Interpret every questionnaire answer using the decision matrices in `detailed-analysis.md`
 2. Determine modernization approach, tooling, and target architecture
@@ -133,7 +133,7 @@ Output as: `working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-Detailed-Asses
 
 **Architecture working docs:**
 
-For each application that has discussion points, create an architecture working doc from the template at `framework/300-Detailed-Assessment/300-Architecture.md`:
+For each application that has discussion points, create an architecture working doc from the template at `references/300-Architecture.md`:
 - Populate the Draft Architecture diagram based on the target architecture
 - Create TD-### entries (status: EXPLORING) for each discussion point
 - Include initial observations from the assessment
@@ -169,7 +169,7 @@ After processing, proceed to Step 7 to regenerate the consolidated assessment.
 
 ### Step 7 - Regenerate the consolidated assessment (iterative)
 
-Re-read all questionnaires (`working/{CUSTOMER}/300-detailed-assessment/*-Questionnaire.md`), all architecture working docs (`working/{CUSTOMER}/300-detailed-assessment/*-Architecture.md`), the feasibility assessment, and the analysis rules from `framework/300-Detailed-Assessment/detailed-analysis.md`.
+Re-read all questionnaires (`working/{CUSTOMER}/300-detailed-assessment/*-Questionnaire.md`), all architecture working docs (`working/{CUSTOMER}/300-detailed-assessment/*-Architecture.md`), the feasibility assessment, and the analysis rules from `references/detailed-analysis.md`.
 
 Update the consolidated assessment:
 
