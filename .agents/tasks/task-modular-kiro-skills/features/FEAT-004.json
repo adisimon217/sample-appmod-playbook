@@ -1,0 +1,34 @@
+{
+  "id": "FEAT-004",
+  "type": "feature",
+  "description": "Create Phase 400 (generate-plans) skill that converts the existing framework/400-Mod-Plan/README.md prompts into a self-contained, invocable Kiro skill. The skill covers all three plan types (PoC, EBA, full project) in a single invocation, explains the sequencing (PoC validates unknowns for EBAs, EBAs establish patterns for full projects), references templates and sample outputs, and includes the EBA Preparation Checklist as a post-generation step. Also update the engagement template and README.md with skills references.",
+  "status": "completed",
+  "steps": [
+    "Create .kiro/skills/generate-plans/SKILL.md with YAML frontmatter (name: generate-plans, description about Phase 400 execution plan generation covering PoC, EBA, and full project plans). The workflow should cover: Step 1 - Identify customer and validate Phase 300 readiness, Step 2 - Classify applications by execution path, Step 3 - Generate PoC plans for EXPLORING decisions, Step 4 - Generate EBA plans for eligible applications, Step 5 - Generate full modernization plans for large/complex applications, Step 6 - Cross-reference and dependency validation, Step 7 - Post-generation: EBA Preparation Checklist, Step 8 - Mark Phase 400 complete.",
+    "Include the plan sequencing logic: PoCs come before EBAs (validate unknowns), EBAs come before full projects (establish patterns).",
+    "Reference all framework files: framework/400-Mod-Plan/420-PoC/PoC-Plan-Template.md, framework/400-Mod-Plan/430-EBA/EBA-Plan-Template.md, framework/400-Mod-Plan/430-EBA/EBA-Preparation-Checklist.md, and both sample outputs.",
+    "Reference the detailed-assessment skill as the upstream dependency.",
+    "Update framework/engagement-template.md to add a note about skills as the primary invocation method.",
+    "Update README.md at the workspace root to add a section listing all available skills."
+  ],
+  "acceptance_criteria": [
+    ".kiro/skills/generate-plans/SKILL.md exists with valid YAML frontmatter (name + description) and step-by-step workflow",
+    "The skill covers all three plan types (PoC, EBA, full project) in a single invocation",
+    "The skill explains the sequencing: PoC plans validate unknowns for EBAs, EBAs establish patterns for full projects",
+    "The skill references PoC-Plan-Template.md, EBA-Plan-Template.md, EBA-Preparation-Checklist.md, and both sample outputs using workspace-root-relative paths",
+    "The skill includes the EBA Preparation Checklist as a post-generation step",
+    "The skill references detailed-assessment as the upstream skill",
+    "framework/engagement-template.md is updated with a note about skills as the primary invocation method",
+    "README.md is updated with a section listing all available skills"
+  ],
+  "verification": [
+    "Confirm .kiro/skills/generate-plans/SKILL.md exists and has valid YAML frontmatter with --- delimiters",
+    "Confirm the skill references all framework/400-Mod-Plan template and sample files",
+    "Confirm the skill mentions the EBA Preparation Checklist as a post-generation step",
+    "Confirm the skill explains plan sequencing (PoC -> EBA -> full project)",
+    "Confirm framework/engagement-template.md has a skills note",
+    "Confirm README.md has an Available Skills section"
+  ],
+  "blocked_reason": null,
+  "findings": "Skill created successfully covering all three plan types (PoC, EBA, full project) in a single invocation with 8 workflow steps. Explains sequencing logic (PoC validates unknowns for EBAs, EBAs establish patterns for full projects). References all framework/400-Mod-Plan templates and sample outputs. Includes EBA Preparation Checklist as Step 7 post-generation activity. References detailed-assessment as upstream skill. Updated engagement-template.md with a How to Use section showing skills as primary invocation method. Updated README.md with a comprehensive Available Skills table listing all 6 skills."
+}
