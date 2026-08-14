@@ -1,0 +1,31 @@
+{
+  "id": "FEAT-001",
+  "type": "refactor",
+  "description": "Create the core engagement initiation skill that replaces the initiation logic currently split between framework.md steering, workspace-rules.md steering, and the root README prompt. This skill handles: creating a new customer engagement folder, copying templates, asking engagement type questions, and scaffolding the workspace. Also consolidate the steering files - remove initiation logic from framework.md and workspace-rules.md (keeping only passive context), and remove phase-300.md (its logic moves into the Phase 300 skill).",
+  "status": "in_progress",
+  "steps": [
+    "Create .kiro/skills/start-engagement/SKILL.md with YAML frontmatter (name: start-engagement, description about starting new customer modernization engagements). The workflow should include: Step 1 - Get customer name, Step 2 - Create folder structure (working/{CUSTOMER}/ with all subfolders), Step 3 - Copy engagement-template.md replacing {CUSTOMER} placeholders, Step 4 - Copy phase READMEs into customer folders adjusting relative links, Step 5 - Copy blank inventory template, Step 6 - Ask engagement type (A/B/C questions from current framework.md steering), Step 7 - Apply engagement type to progress table, Step 8 - Guide user on next steps and which skill to invoke next.",
+    "Refactor .kiro/steering/framework.md: Remove the 'Engagement Initiation' section (steps 1-6 with the A/B/C questions) since that logic now lives in the start-engagement skill. Keep the framework overview, phases table, workspace structure, and key conventions sections as passive context.",
+    "Refactor .kiro/steering/workspace-rules.md: Remove the 'Customer engagement initiation' section (steps 1-8) since that now lives in the start-engagement skill. Keep framework protection rules, working folder conventions, and .gitkeep cleanup rules.",
+    "Delete .kiro/steering/phase-300.md entirely - its questionnaire pre-population selection logic will be incorporated into the Phase 300 skill (FEAT-003).",
+    "Update the root README.md 'Getting Started' section to reference the start-engagement skill by name instead of showing a copy-paste prompt. Change it to something like: 'To start a new customer engagement, invoke the `start-engagement` skill and provide the customer name.'"
+  ],
+  "acceptance_criteria": [
+    ".kiro/skills/start-engagement/SKILL.md exists with valid YAML frontmatter (name + description) and step-by-step workflow",
+    "The skill contains all the engagement type questions (A/B/C) and folder scaffolding logic previously in steering files",
+    "framework.md no longer contains the Engagement Initiation section (steps 1-6)",
+    "workspace-rules.md no longer contains the Customer engagement initiation section (steps 1-8)",
+    ".kiro/steering/phase-300.md is deleted",
+    "README.md Getting Started references the skill by name rather than a copy-paste prompt",
+    "The skill references framework/engagement-template.md and framework/100-Data-Collection/100-App-Inventory.xlsx using workspace-root-relative paths"
+  ],
+  "verification": [
+    "Confirm .kiro/skills/start-engagement/SKILL.md exists and has valid YAML frontmatter with --- delimiters",
+    "Confirm .kiro/steering/phase-300.md does not exist",
+    "Confirm framework.md does not contain 'Engagement Initiation' heading",
+    "Confirm workspace-rules.md does not contain 'Customer engagement initiation' heading",
+    "Confirm README.md references start-engagement skill"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

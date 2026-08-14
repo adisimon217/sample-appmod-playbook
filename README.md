@@ -51,13 +51,9 @@ working/                          # Per-customer work. All modifications happen 
 
 ## Getting Started
 
-To start a new customer engagement:
+To start a new customer engagement, invoke the `start-engagement` skill and provide the customer name. The skill will create the folder structure, copy templates, ask about the engagement type, and guide you on next steps.
 
-```
-Using #File:framework/engagement-template.md, create a new engagement for customer "{CUSTOMER}"
-```
-
-Then open `working/{CUSTOMER}/engagement.md` and follow the prompts.
+Once the engagement is set up, open `working/{CUSTOMER}/engagement.md` and follow the phase instructions.
 
 ## Target State
 
