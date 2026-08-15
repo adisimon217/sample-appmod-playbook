@@ -1,0 +1,7 @@
+{
+  "task_id": "task-customer-facing-skills",
+  "task_description": "Convert the ModNet modernization playbook from a partner-facing tool to a customer-facing tool. Rename start-engagement to start-project, replace {CUSTOMER} with {PROJECT}, create skill-activation.md for natural language skill routing, remove hooks, and update all skills/steering/README to use direct customer-facing language.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001"],
+  "blocked_reason": null
+}

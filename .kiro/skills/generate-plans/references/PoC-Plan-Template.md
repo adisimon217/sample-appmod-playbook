@@ -1,4 +1,4 @@
-# {CUSTOMER} — PoC Plan: {PoC Title}
+# {PROJECT} — PoC Plan: {PoC Title}
 
 <!--
   Inputs:
@@ -9,7 +9,7 @@
 
 | | |
 |---|---|
-| Customer | {CUSTOMER} |
+| Project | {PROJECT} |
 | Application(s) | {APP_NAME(s)} |
 | Related decision | {TD-### from architecture working doc} |
 | Prepared by | AWS Team |

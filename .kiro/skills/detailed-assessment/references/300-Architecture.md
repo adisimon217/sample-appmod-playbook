@@ -1,7 +1,7 @@
 # Architecture Working Document
 
 **Application:** {APP_NAME} ({APP_ID})
-**Customer:** {CUSTOMER}
+**Project:** {PROJECT}
 **Status:** Draft / Under Review / Agreed
 **Last Updated:** {date}
 
@@ -45,7 +45,7 @@ Supporting services: ECR, Secrets Manager, SSM Parameter Store, CloudWatch.
 
 **Proposal:** {What AWS recommended and why}
 
-**Customer position:** {Agreement, pushback, concerns}
+**Position:** {Agreement, pushback, concerns}
 
 **Alternatives explored:**
 1. {Option} — {pros/cons}

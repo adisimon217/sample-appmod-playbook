@@ -10,17 +10,17 @@ Consistent formatting across all framework outputs. Follow these conventions whe
 ## Mermaid Quadrant Charts
 
 When using `quadrantChart` for prioritization matrices:
-- Never place points on the boundary lines — avoid 0.50 on either axis
+- Never place points on the boundary lines - avoid 0.50 on either axis
 - Each point must sit clearly within one of the four quadrants
-- Use coordinate ranges: Low = 0.10–0.45, High = 0.55–0.90
-- Space points apart so labels don't overlap — minimum 0.10 distance between points on the same axis
+- Use coordinate ranges: Low = 0.10-0.45, High = 0.55-0.90
+- Space points apart so labels don't overlap - minimum 0.10 distance between points on the same axis
 - Keep labels short (app name only, no IDs or descriptions)
 
 ## Mermaid Architecture Diagrams
 
-- Use `graph TD` (top-down) for architecture diagrams — vertical layout avoids horizontal compression
-- Limit to ~10 nodes max — show core components only
-- Use short, single-line labels — no `<br/>` line breaks in node text
+- Use `graph TD` (top-down) for architecture diagrams - vertical layout avoids horizontal compression
+- Limit to ~10 nodes max - show core components only
+- Use short, single-line labels - no `<br/>` line breaks in node text
 - List supporting AWS services (ECR, Secrets Manager, SSM, CloudWatch) as a text note below the diagram, not as nodes
 - Use `subgraph` only for the ECS cluster grouping, not for every service category
 - External dependencies use dotted lines (`-.->`)
@@ -36,13 +36,13 @@ When using `quadrantChart` for prioritization matrices:
 ## Status Indicators
 
 Use these consistently across architecture working docs, EBA plans, and checklists:
-- 🟢 AGREED — decision finalized, no further discussion needed
-- 🟡 EXPLORING — under discussion or PoC in progress
-- 🔴 BLOCKED — needs resolution before EBA can proceed
-- ⚪ DEFERRED — parked for post-EBA
-- 📋 — value carried forward from a previous phase (pre-populated)
-- ⚠️ — targeted follow-up question or caution flag
-- 🔍 — item requiring further investigation or customer input
+- 🟢 AGREED - decision finalized, no further discussion needed
+- 🟡 EXPLORING - under discussion or PoC in progress
+- 🔴 BLOCKED - needs resolution before EBA can proceed
+- ⚪ DEFERRED - parked for post-EBA
+- 📋 - value carried forward from a previous phase (pre-populated)
+- ⚠️ - targeted follow-up question or caution flag
+- 🔍 - item requiring further investigation
 
 ## Tables vs Lists
 
@@ -54,7 +54,7 @@ Use these consistently across architecture working docs, EBA plans, and checklis
 
 ## PoC and EBA Plan Table Conventions
 
-- **No Owner column.** Everything is owned by the customer. Remove Owner columns from Entry Criteria, Execution Plan, and Exit Criteria tables.
+- **No Owner column.** Remove Owner columns from Entry Criteria, Execution Plan, and Exit Criteria tables.
 - **Entry Criteria:** columns are `#`, `Criterion`, `Status`
 - **Execution Plan:** columns are `Sno`, `Activity`, `Status`
 - **Exit Criteria:** columns are `#`, `Criterion`, `How to verify`, `Result`
@@ -62,17 +62,17 @@ Use these consistently across architecture working docs, EBA plans, and checklis
 
 ## Headings
 
-- `#` — document title only (one per file)
-- `##` — major sections (Executive Summary, Technical Decisions, Meeting Log)
-- `###` — subsections (individual decisions like TD-001, individual meetings by date)
-- Don't go deeper than `###` — use bold text or tables instead
+- `#` - document title only (one per file)
+- `##` - major sections (Executive Summary, Technical Decisions, Meeting Log)
+- `###` - subsections (individual decisions like TD-001, individual meetings by date)
+- Don't go deeper than `###` - use bold text or tables instead
 
 ## General
 
-- Be concise — these documents are working artefacts, not prose. Prefer short sentences.
-- Use the customer's actual name, not "the customer"
-- Document metadata (customer, application, date, author, duration) should use a compact table — not stacked bold lines
-- Decision entries: Proposal → Customer position → Alternatives → Decision (keep each to 1–3 sentences)
+- Be concise - these documents are working artefacts, not prose. Prefer short sentences.
+- Use the project's actual name, not generic placeholders
+- Document metadata (project, application, date, author, duration) should use a compact table - not stacked bold lines
+- Decision entries: Proposal → Position → Alternatives → Decision (keep each to 1-3 sentences)
 - Meeting logs: Discussed → Decided → Actions → Open (bullet points, not paragraphs)
-- Code blocks for Kiro prompts — use triple backticks with no language tag
+- Code blocks for Kiro prompts - use triple backticks with no language tag
 - When referencing files in prompts, use `#File:path/to/file.md` syntax

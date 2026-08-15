@@ -4,13 +4,13 @@ inclusion: always
 
 # ModNet Framework — Windows (.NET & SQL Server) Modernization on AWS
 
-Structured modernization framework for AWS partners. Skills contain their own reference material (templates, rules, samples) in their `references/` subfolder. All customer-specific outputs go in `working/`.
+Modernization framework for assessing, planning, and executing the migration of Windows workloads (.NET + SQL Server) to AWS. Skills contain their own reference material (templates, rules, samples) in their `references/` subfolder. All project-specific outputs go in `working/`.
 
 ## Skills
 
 | Skill | Phase | References |
 |-------|-------|------------|
-| `start-engagement` | Setup | `references/engagement-template.md` |
+| `start-project` | Setup | `references/project-template.md` |
 | `data-collection` | 100 | `references/100-App-Inventory.xlsx` |
 | `feasibility-analysis` | 200 | `references/feasibility-analysis.md`, `references/aws-tools-analysis.md`, `references/atxconfig-coda.yaml` |
 | `detailed-assessment` | 300 | `references/300-App-Questionnaire.md`, `references/detailed-analysis.md`, `references/300-Architecture.md` |
@@ -23,7 +23,7 @@ Each skill's `references/` folder contains the templates, analysis rules, and sa
 
 ```
 .kiro/skills/                     # Skills with embedded reference material
-  start-engagement/
+  start-project/
     SKILL.md
     references/
   data-collection/
@@ -41,9 +41,9 @@ Each skill's `references/` folder contains the templates, analysis rules, and sa
   excel-analysis/
     SKILL.md
 
-working/                          # Per-customer work.
-  {CUSTOMER}/
-    engagement.md                 # Runbook with all prompts
+working/                          # Per-project work
+  {PROJECT}/
+    engagement.md                 # Runbook with progress tracking
     reference/
     100-data-collection/
     200-mod-feasibility/
@@ -56,8 +56,7 @@ working/                          # Per-customer work.
 
 ## Key Conventions
 
-- Skill reference files (`.kiro/skills/*/references/`) are read-only reference material - never modified during customer work
-- Each customer engagement starts by invoking the `start-engagement` skill
-- The `engagement.md` in each customer folder is the primary interface - all prompts with paths pre-filled
-- Phase 200 prompts read the Excel inventory directly (excel-analysis skill) - no CSV export
+- Skill reference files (`.kiro/skills/*/references/`) are read-only reference material - never modified during project work
+- The `engagement.md` in each project folder is the primary interface - contains progress tracking and all output paths
+- Phase 200 reads the Excel inventory directly (excel-analysis skill) - no CSV export
 - All modernization plans should be decisive: one recommended approach per decision point

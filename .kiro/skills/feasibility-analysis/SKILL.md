@@ -5,30 +5,30 @@ description: Execute Phase 200 modernization feasibility analysis. Reads the com
 
 ## Workflow
 
-Follow these steps in order to complete Phase 200 feasibility analysis for a customer engagement.
+Follow these steps in order to complete Phase 200 feasibility analysis for your project.
 
-### Step 1 - Identify the customer and verify prerequisites
+### Step 1 - Identify the project and verify prerequisites
 
-Determine the customer name (`{CUSTOMER}`) from context. Verify that:
+Determine the project name (`{PROJECT}`) from context. Verify that:
 
-1. The validated inventory exists at `working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx`
-2. The working folder `working/{CUSTOMER}/200-mod-feasibility/` exists
+1. The validated inventory exists at `working/{PROJECT}/100-data-collection/{PROJECT}-App-Inventory.xlsx`
+2. The working folder `working/{PROJECT}/200-mod-feasibility/` exists
 
-If the inventory does not exist or Phase 100 is not complete, ask the user to invoke the `data-collection` skill first.
+If the inventory does not exist or Phase 100 is not complete, the `data-collection` skill should be run first.
 
 ### Step 2 - Read the inventory
 
-Use the `excel-analysis` skill to read all sheets from `working/{CUSTOMER}/100-data-collection/{CUSTOMER}-App-Inventory.xlsx`:
+Use the `excel-analysis` skill to read all sheets from `working/{PROJECT}/100-data-collection/{PROJECT}-App-Inventory.xlsx`:
 
 - **Applications sheet**: one row per app with 22 columns (App ID, App Name, Application Type, .NET Version, LOC, Windows Dependencies, IIS Dependencies, etc.)
 - **Databases sheet**: one row per database with 19 columns (DB ID, Linked App ID, SQL Server version, stored procedure count, advanced features, etc.)
-- **Metadata sheet**: customer name, date, assessor
+- **Metadata sheet**: project name, date, assessor
 
 Display a summary of the portfolio (number of applications, number of databases, key statistics).
 
 ### Step 3 - Ask about the ATX Comprehensive Codebase Analysis accelerator
 
-For engagements where the customer already has candidate applications identified (front-loaded EBA, assessment-only, or small portfolios with 5 or fewer apps), recommend running the ATX Comprehensive Codebase Analysis:
+For projects where candidate applications are already identified (front-loaded EBA, assessment-only, or small portfolios with 5 or fewer apps), recommend running the ATX Comprehensive Codebase Analysis:
 
 > **Optional Accelerator: ATX Comprehensive Codebase Analysis**
 >
@@ -36,18 +36,18 @@ For engagements where the customer already has candidate applications identified
 >
 > **Prerequisites:**
 > - Application source code must be accessible
-> - Ask the customer to export all SQL Server DDLs (tables, views, stored procedures, functions, triggers) into a folder within each repository (e.g., `database/` or `sql/`). Use SSMS "Generate Scripts" or:
+> - Export all SQL Server DDLs (tables, views, stored procedures, functions, triggers) into a folder within each repository (e.g., `database/` or `sql/`). Use SSMS "Generate Scripts" or:
 >   ```
 >   mssql-scripter -S <server> -d <database> -f ./database/ --file-per-object
 >   ```
 >
 > **To run:**
-> 1. Copy `references/atxconfig-coda.yaml` to `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`
-> 2. For each application, execute from `working/{CUSTOMER}/200-mod-feasibility/`:
+> 1. Copy `references/atxconfig-coda.yaml` to `working/{PROJECT}/200-mod-feasibility/atxconfig-coda.yaml`
+> 2. For each application, execute from `working/{PROJECT}/200-mod-feasibility/`:
 >    ```
 >    atx custom def exec -t -n AWS/comprehensive-codebase-analysis -g file://atxconfig-coda.yaml -p <repo-path>
 >    ```
-> 3. Save output in `working/{CUSTOMER}/200-mod-feasibility/{APP-NAME}-codebase-analysis/`
+> 3. Save output in `working/{PROJECT}/200-mod-feasibility/{APP-NAME}-codebase-analysis/`
 >
 > Would you like to run the codebase analysis accelerator, or proceed with inventory-based scoring?
 
@@ -70,7 +70,7 @@ Classify each application into one of four categories:
 
 Only CAT1 and CAT2 applications proceed to the next steps. CAT3 applications are flagged but do not need modernization. CAT4 applications need data clarification.
 
-Present the classification table to the user for review.
+Present the classification table for review.
 
 #### Step 4b - AWS Transform eligibility and modernization pathways
 
@@ -84,9 +84,9 @@ For each CAT1 and CAT2 application, check eligibility against the rules in `refe
 
 If the AWS Knowledge MCP Server is available, verify the latest AWS Transform capabilities by searching for current eligibility criteria. Override the static rules where the latest documentation differs.
 
-If the AWS Knowledge MCP Server is not available, proceed with the static rules in `references/aws-tools-analysis.md` as-is and note to the user that eligibility criteria should be verified against current AWS documentation before finalizing recommendations.
+If the AWS Knowledge MCP Server is not available, proceed with the static rules in `references/aws-tools-analysis.md` as-is and note that eligibility criteria should be verified against current AWS documentation before finalizing recommendations.
 
-Present the eligibility matrix to the user.
+Present the eligibility matrix.
 
 #### Step 4c - Technical complexity scoring
 
@@ -128,7 +128,7 @@ Flag data gaps needed for Phase 300 per application.
 ### Step 5 - Save the output
 
 Save the complete feasibility assessment as:
-`working/{CUSTOMER}/200-mod-feasibility/{CUSTOMER}-Feasibility-Assessment.md`
+`working/{PROJECT}/200-mod-feasibility/{PROJECT}-Feasibility-Assessment.md`
 
 The output should contain four sections corresponding to Steps 4a-4d:
 1. Windows Workload Classification
@@ -140,7 +140,7 @@ If ATX Codebase Analysis was used, note "ATX Codebase Analysis available" per ap
 
 ### Step 6 - Mark Phase 200 complete and proceed
 
-1. Update the Progress table in `working/{CUSTOMER}/engagement.md` to mark Phase 200 as "Complete".
+1. Update the Progress table in `working/{PROJECT}/engagement.md` to mark Phase 200 as "Complete".
 2. Present a summary of the key findings:
    - Total applications assessed
    - Pilot/PoC selection with rationale
@@ -149,11 +149,11 @@ If ATX Codebase Analysis was used, note "ATX Codebase Analysis available" per ap
 3. Recommend next steps:
 
 > Phase 200 Modernization Feasibility is complete. The assessment is saved at:
-> `working/{CUSTOMER}/200-mod-feasibility/{CUSTOMER}-Feasibility-Assessment.md`
+> `working/{PROJECT}/200-mod-feasibility/{PROJECT}-Feasibility-Assessment.md`
 >
 > **Next steps:**
-> - Review the feasibility assessment with the customer
+> - Review the feasibility assessment
 > - For the Pilot/PoC application(s), gather source code access and prepare for detailed assessment
-> - Invoke the Phase 300 skill to begin detailed assessment and questionnaire completion for the selected applications
+> - Phase 300 will begin detailed assessment and questionnaire completion for the selected applications
 >
-> The applications selected for modernization in the wave plan should proceed to Phase 300 in wave order (Pilot first, then Wave 1, Wave 2, etc.).
+> Applications selected for modernization in the wave plan should proceed to Phase 300 in wave order (Pilot first, then Wave 1, Wave 2, etc.).

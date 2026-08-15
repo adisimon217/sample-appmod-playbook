@@ -3,7 +3,7 @@
 This file defines the tool eligibility checks and modernization pathway recommendations for Step 2 of the feasibility analysis. It is maintained separately because AWS tools and services evolve rapidly.
 
 > **Important — Verify with latest documentation.**
-> AWS modernization services evolve frequently. The eligibility criteria below reflect the state of AWS Transform documentation as of August 2026, but may lag behind the latest service updates. Before finalizing tool eligibility for a customer engagement, verify the current capabilities using one of these approaches:
+> AWS modernization services evolve frequently. The eligibility criteria below reflect the state of AWS Transform documentation as of August 2026, but may lag behind the latest service updates. Before finalizing tool eligibility for a project, verify the current capabilities using one of these approaches:
 >
 > **Option A — AWS Knowledge MCP Server (recommended for agentic IDEs)**
 > If you are running this analysis in an agentic coding IDE such as Kiro, check if the [AWS Documentation MCP Server](https://awslabs.github.io/mcp/) is configured and enabled to get real-time access to the latest AWS documentation. If not configured, prompt the user to do so.
@@ -32,7 +32,7 @@ This file defines the tool eligibility checks and modernization pathway recommen
 | DMS | AWS Database Migration Service |
 | DMS SC / SCT | DMS Schema Conversion (also known as Schema Conversion Tool) |
 
-These shorthands are used throughout this document and in customer deliverables.
+These shorthands are used throughout this document and in project deliverables.
 
 ---
 
@@ -316,7 +316,7 @@ Best for:
 The `AWS/comprehensive-codebase-analysis` managed transformation provides AI-powered deep static analysis of any codebase. It produces structured documentation that accelerates assessment phases and informs modernization planning.
 
 **When to use:**
-- Phase 200 (Feasibility): When the customer already has 1–few candidate applications identified and you want evidence-based complexity data before scoring
+- Phase 200 (Feasibility): When you already have 1–few candidate applications identified and you want evidence-based complexity data before scoring
 - Phase 300 (Detailed Assessment): As input to architecture decisions, questionnaire answers, and planning docs
 - Front-loaded EBA engagements: Run before the EBA to give teams pre-built understanding of the application without weeks of manual code review
 - Inherited or undocumented codebases where architecture knowledge is scattered or missing
@@ -329,8 +329,8 @@ The `AWS/comprehensive-codebase-analysis` managed transformation provides AI-pow
 
 **How to run:**
 
-1. Copy the configuration file from `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml` into the customer working folder (e.g., `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`). Customize the `additionalPlanContext` if you need the analysis to focus on specific areas (e.g., data access patterns, auth usage, cross-database joins).
-2. **Export database DDLs into the repository** — Before running the analysis, ask the customer to export all SQL Server DDL scripts (tables, views, stored procedures, functions, triggers) into a folder within the repository (e.g., `database/` or `sql/`). This gives the analysis agent full visibility into the data layer alongside the application code, producing more accurate dependency maps, stored procedure call graphs, and data access pattern identification. Use SSMS "Generate Scripts" or a tool like `mssql-scripter` to export:
+1. Copy the configuration file from `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml` into the project working folder (e.g., `working/{PROJECT}/200-mod-feasibility/atxconfig-coda.yaml`). Customize the `additionalPlanContext` if you need the analysis to focus on specific areas (e.g., data access patterns, auth usage, cross-database joins).
+2. **Export database DDLs into the repository** — Before running the analysis, export all SQL Server DDL scripts (tables, views, stored procedures, functions, triggers) into a folder within the repository (e.g., `database/` or `sql/`). This gives the analysis agent full visibility into the data layer alongside the application code, producing more accurate dependency maps, stored procedure call graphs, and data access pattern identification. Use SSMS "Generate Scripts" or a tool like `mssql-scripter` to export:
    ```
    mssql-scripter -S <server> -d <database> -f ./database/ --file-per-object
    ```
@@ -354,10 +354,10 @@ The provided `atxconfig-coda.yaml` (in `.kiro/skills/feasibility-analysis/refere
 - Technical debt findings → refine complexity scoring in Step 3 (override base scores with evidence)
 - Dependency graphs → inform cross-application dependency mapping in Step 4
 - Architectural insights → pre-populate Phase 300 architecture working documents
-- Business logic extraction → answer Phase 300 questionnaire items without customer interviews
+- Business logic extraction → answer Phase 300 questionnaire items without additional interviews
 - Component analysis → identify specific ATX blockers (3rd party UI, unsupported patterns) with precision
 
-**Recommendation:** For engagements where the customer has already identified candidate applications (front-loaded EBA, assessment-only, or small portfolios < 5 apps), run the comprehensive codebase analysis on each candidate as the first action in Phase 200. Use the output as primary evidence for all subsequent feasibility scoring, pathway selection, and Phase 300 planning. This replaces weeks of manual code review and produces artefacts that can be shared with both technical teams and business stakeholders.
+**Recommendation:** For engagements where you have already identified candidate applications (front-loaded EBA, assessment-only, or small portfolios < 5 apps), run the comprehensive codebase analysis on each candidate as the first action in Phase 200. Use the output as primary evidence for all subsequent feasibility scoring, pathway selection, and Phase 300 planning. This replaces weeks of manual code review and produces artefacts that can be shared with both technical teams and business stakeholders.
 
 ### When to Use Which
 
