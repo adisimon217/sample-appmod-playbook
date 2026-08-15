@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "refactor",
   "description": "Rename start-engagement to start-project, create skill-activation.md steering file, remove hooks, and convert all skills/steering/README to customer-facing language. This is the entire transformation in one coherent unit.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Create a new git branch 'feat/customer-facing-skills' from main",
     "Delete the .kiro/hooks/ directory entirely (3 files: sync-architecture-to-plan.kiro.hook, sync-questionnaire-docs.kiro.hook, sync-questionnaires.kiro.hook)",
@@ -46,5 +46,5 @@
     "Run: grep -r 'walk the customer' .kiro/ and confirm zero matches"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "All {CUSTOMER} references replaced with {PROJECT} including in skill references/ template files. Partner-facing language removed from all skills, steering files, and README. The skill-activation.md steering file maps natural language intents to skills with workspace state detection. Sample output files in references/sample-output/ were left mostly untouched since they use fictional app/project names (not partner language). The word 'customer' remains only in technical contexts like 'customer data model' in sample outputs."
 }
