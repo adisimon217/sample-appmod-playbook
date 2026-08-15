@@ -1,0 +1,32 @@
+{
+  "id": "FEAT-003",
+  "type": "feature",
+  "description": "Create Phase 300 (detailed-assessment) skill that converts the existing framework/300-Detailed-Assessment/README.md prompts into a self-contained, invocable Kiro skill. Incorporates the deleted phase-300.md application selection logic and handles both Path A (from Phase 200) and Path B (front-loaded EBA). The skill covers application selection, questionnaire pre-population, consolidated assessment generation, architecture workshops, and the iterative refinement cycle.",
+  "status": "completed",
+  "steps": [
+    "Create .kiro/skills/detailed-assessment/SKILL.md with YAML frontmatter (name: detailed-assessment, description about Phase 300 per-application deep dive covering questionnaire completion, consolidated assessment, and iterative architecture refinement). The workflow should cover: Step 1 - Identify customer and determine path (A or B), Step 2 - Select applications for assessment (incorporating deleted phase-300.md logic about portfolio display and pilot selection), Step 3 - Pre-populate questionnaires (including ATX codebase analysis option), Step 4 - Generate consolidated assessment and architecture working docs, Step 5 - Architecture workshops and note capture (iterative), Step 6 - Process meeting notes into architecture working docs (iterative), Step 7 - Regenerate consolidated assessment (iterative), Step 8 - Mark Phase 300 complete and proceed to generate-plans skill.",
+    "Incorporate the deleted phase-300.md application selection logic into Step 2: present portfolio from feasibility assessment, if <20 apps list all in table, if 20+ show summary counts and only Pilot/Wave 1 by name, suggest 1-2 applications from Quick Wins quadrant, confirm with user before generating questionnaires.",
+    "Include both Path A (coming from Phase 200 with feasibility data) and Path B (EBA front-loaded, no prior phases) handling.",
+    "Include the iterative nature of Steps 5-7 with clear guidance on when to repeat and when to stop.",
+    "Reference all framework files using workspace-root-relative paths and mention generate-plans as the downstream skill."
+  ],
+  "acceptance_criteria": [
+    ".kiro/skills/detailed-assessment/SKILL.md exists with valid YAML frontmatter (name + description) and step-by-step workflow",
+    "The skill contains the application selection logic from the deleted phase-300.md (portfolio display rules, pilot suggestion, user confirmation)",
+    "The skill handles both Path A (from Phase 200) and Path B (front-loaded EBA) flows",
+    "The skill includes questionnaire pre-population with ATX codebase analysis option",
+    "The skill includes the iterative refinement loop (architecture workshops -> process notes -> regenerate assessment)",
+    "The skill references framework/300-Detailed-Assessment/300-App-Questionnaire.md, framework/300-Detailed-Assessment/300-Architecture.md, and framework/300-Detailed-Assessment/detailed-analysis.md using workspace-root-relative paths",
+    "The skill mentions generate-plans as the downstream skill to invoke next",
+    "The skill references the excel-analysis skill for spreadsheet operations where needed"
+  ],
+  "verification": [
+    "Confirm .kiro/skills/detailed-assessment/SKILL.md exists and has valid YAML frontmatter with --- delimiters",
+    "Confirm the skill references all three framework/300-Detailed-Assessment files",
+    "Confirm the skill mentions generate-plans as the next skill",
+    "Confirm the skill contains portfolio display logic (<20 apps vs 20+ apps)",
+    "Confirm the skill handles Path B (EBA front-loaded)"
+  ],
+  "blocked_reason": null,
+  "findings": "Skill created successfully with all Phase 300 logic from framework/300-Detailed-Assessment/README.md. Incorporates the deleted phase-300.md application selection logic (portfolio display rules for <20 and 20+ apps, pilot suggestion from Quick Wins quadrant, user confirmation). Handles both Path A (from Phase 200 feasibility) and Path B (EBA front-loaded). Iterative loop (Steps 5-7) includes clear exit criteria based on decision status (AGREED/EXPLORING/BLOCKED/DEFERRED). References all three framework files, excel-analysis skill, and generate-plans as downstream skill."
+}

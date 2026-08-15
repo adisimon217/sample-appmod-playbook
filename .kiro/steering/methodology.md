@@ -1,6 +1,6 @@
 ---
 inclusion: fileMatch
-fileMatchPattern: "{framework/300-Detailed-Assessment/**,framework/400-Mod-Plan/**,working/**}"
+fileMatchPattern: "{.kiro/skills/detailed-assessment/references/**,.kiro/skills/generate-plans/references/**,working/**}"
 ---
 
 # Assessment approach

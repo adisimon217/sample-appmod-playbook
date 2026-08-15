@@ -4,33 +4,42 @@ inclusion: always
 
 # ModNet Framework — Windows (.NET & SQL Server) Modernization on AWS
 
-Structured modernization framework for AWS partners. Two top-level folders:
+Structured modernization framework for AWS partners. Skills contain their own reference material (templates, rules, samples) in their `references/` subfolder. All customer-specific outputs go in `working/`.
 
-- `framework/` — read-only reference material (templates, rules, samples). Never modified per-customer.
-- `working/` — per-customer work. All outputs go here.
+## Skills
 
-## Framework Phases
+| Skill | Phase | References |
+|-------|-------|------------|
+| `start-engagement` | Setup | `references/engagement-template.md` |
+| `data-collection` | 100 | `references/100-App-Inventory.xlsx` |
+| `feasibility-analysis` | 200 | `references/feasibility-analysis.md`, `references/aws-tools-analysis.md`, `references/atxconfig-coda.yaml` |
+| `detailed-assessment` | 300 | `references/300-App-Questionnaire.md`, `references/detailed-analysis.md`, `references/300-Architecture.md` |
+| `generate-plans` | 400 | `references/PoC-Plan-Template.md`, `references/EBA-Plan-Template.md`, `references/EBA-Preparation-Checklist.md` |
+| `excel-analysis` | Utility | (no references) |
 
-| Phase | What happens | Framework docs |
-|-------|-------------|---------------|
-| 100 — Data Collection | Portfolio inventory | `framework/100-Data-Collection/` |
-| 200 — Mod Feasibility | Classify, score, prioritize, wave plan | `framework/200-Mod-Feasibility/` |
-| 300 — Detailed Assessment & Architecture | Per-app questionnaire, collaborative architecture, consolidated assessment | `framework/300-Detailed-Assessment/` |
-| 400 — Mod Plan | PoC plans, EBA plans, full project plans | `framework/400-Mod-Plan/` |
+Each skill's `references/` folder contains the templates, analysis rules, and sample outputs it needs. Skills reference their own files with relative paths (e.g., `references/feasibility-analysis.md`). When a skill needs another skill's reference file, it uses the full workspace path (e.g., `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml`).
 
 ## Workspace Structure
 
 ```
-framework/                        # Read-only. Templates, rules, samples.
-  100-Data-Collection/
-  200-Mod-Feasibility/
-    210-Tool-Feasibility/
-  300-Detailed-Assessment/
-  400-Mod-Plan/
-    410-Accelerators/
-    420-PoC/
-    430-EBA/
-  engagement-template.md
+.kiro/skills/                     # Skills with embedded reference material
+  start-engagement/
+    SKILL.md
+    references/
+  data-collection/
+    SKILL.md
+    references/
+  feasibility-analysis/
+    SKILL.md
+    references/
+  detailed-assessment/
+    SKILL.md
+    references/
+  generate-plans/
+    SKILL.md
+    references/
+  excel-analysis/
+    SKILL.md
 
 working/                          # Per-customer work.
   {CUSTOMER}/
@@ -47,49 +56,8 @@ working/                          # Per-customer work.
 
 ## Key Conventions
 
-- `framework/` is never modified during customer work — read from it, write to `working/`
-- Each customer engagement starts by running the initiation prompt in the root README
-- The `engagement.md` in each customer folder is the primary interface — all prompts with paths pre-filled
-- Phase 200 prompts read the Excel inventory directly (excel-analysis skill) — no CSV export
+- Skill reference files (`.kiro/skills/*/references/`) are read-only reference material - never modified during customer work
+- Each customer engagement starts by invoking the `start-engagement` skill
+- The `engagement.md` in each customer folder is the primary interface - all prompts with paths pre-filled
+- Phase 200 prompts read the Excel inventory directly (excel-analysis skill) - no CSV export
 - All modernization plans should be decisive: one recommended approach per decision point
-
-## Engagement Initiation
-
-When asked to create a new engagement for a customer, follow these steps:
-
-1. Read the engagement template from `framework/engagement-template.md`.
-2. Copy it to `working/{CUSTOMER}/engagement.md`, replacing all `{CUSTOMER}` placeholders with the actual customer name.
-3. Create the full folder structure:
-   ```
-   working/{CUSTOMER}/
-     engagement.md
-     reference/
-     100-data-collection/
-     200-mod-feasibility/
-     300-detailed-assessment/
-       meetings/
-     400-mod-plan/
-   ```
-4. Ask the user for the engagement type using these contextual questions (not phase numbers):
-
-   > To set up this engagement correctly, I need to understand where you're starting from:
-   >
-   > **A) Customer already has 1–2 candidate applications in mind** — they know which apps to modernize and want to get started quickly. We skip portfolio analysis and go straight into detailed assessment and planning.
-   > → *Front-loaded EBA* — Phases 100 & 200 skipped, start at Phase 300 Path B. Recommend running ATX Comprehensive Codebase Analysis on each candidate app immediately.
-   >
-   > **B) Customer has a portfolio of applications and needs help deciding which to modernize first** — they need an inventory, feasibility scoring, and prioritized wave plan before diving into specific apps.
-   > → *Full engagement (100→400)* — All phases active, start at Phase 100 with portfolio inventory.
-   >
-   > **C) Customer wants an assessment and recommendations but isn't ready to commit to execution plans yet** — they want to understand the landscape, complexity, and options before planning.
-   > → *Assessment only* — Phase 400 skipped, start at Phase 100.
-   >
-   > Which situation best describes {CUSTOMER}?
-
-   Wait for the user's answer before proceeding.
-
-   Mapping:
-   - Answer A → Front-loaded EBA: mark Phase 100 and 200 as ⏭️ Skipped
-   - Answer B → Full (100→400): keep all phases active
-   - Answer C → Assessment only: mark Phase 400 as ⏭️ Skipped
-5. Apply the engagement type to the Progress table in engagement.md.
-6. Guide the user on next steps — explain which phase to start with based on the engagement type, point them to the relevant prompt in `engagement.md`, and mention any reference materials they should prepare (e.g., application inventory for Phase 100).
