@@ -29,7 +29,7 @@ Add `.gitkeep` files to empty folders: `reference/` and `300-detailed-assessment
 
 ### Step 3 - Copy project template
 
-Copy `references/project-template.md` to `working/{PROJECT}/engagement.md`.
+Copy `references/project-template.md` to `working/{PROJECT}/project.md`.
 
 Replace all `{PROJECT}` placeholders in the file with the actual project name.
 
@@ -50,7 +50,7 @@ Ask natural questions to understand the scope of the modernization effort:
 >   We will skip the portfolio analysis and go straight into detailed assessment and planning for that application.
 >
 > - **Are you looking for an assessment and recommendations first?**
->   We will assess the landscape, complexity, and options without committing to execution plans yet.
+>   We will assess the landscape, complexity, and options without committing to execution plans yet (includes per-app analysis, stops before execution plans).
 >
 > Which best describes your situation?
 
@@ -63,7 +63,7 @@ Wait for the answer before proceeding.
 
 ### Step 6 - Apply project scope to progress table
 
-Update the Progress table in `working/{PROJECT}/engagement.md` based on the answer:
+Update the Progress table in `working/{PROJECT}/project.md` based on the answer:
 
 - **Portfolio modernization (Full):** Keep all phases as "Not started". Set engagement type field to "Full (100 to 400)".
 - **Specific application (Front-loaded):** Mark Phase 100 and Phase 200 as `Skipped`. Set engagement type field to "Front-loaded EBA".
@@ -71,7 +71,7 @@ Update the Progress table in `working/{PROJECT}/engagement.md` based on the answ
 
 ### Step 7 - Guide on next steps
 
-Based on the project scope, explain which phase to start with and point to the relevant section in `working/{PROJECT}/engagement.md`:
+Based on the project scope, explain which phase to start with and point to the relevant section in `working/{PROJECT}/project.md`:
 
 - **Full / Assessment:** Start at Phase 100. Prepare or provide the application inventory spreadsheet. The `excel-analysis` skill can help work with the inventory.
 - **Front-loaded (specific app):** Start at Phase 300. Gather application source code and consider running ATX Comprehensive Codebase Analysis. Phase 300 will begin with questionnaire completion.

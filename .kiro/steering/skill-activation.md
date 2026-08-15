@@ -47,7 +47,7 @@ Before activating a skill, check the current state of the `working/` folder to d
 
 2. **Project folder exists but is mostly empty** (`working/{PROJECT}/` with only the template structure)
    - Project was set up but no phase has started
-   - Check engagement type in `engagement.md` to determine the right starting phase
+   - Check engagement type in `project.md` to determine the right starting phase
    - If Full or Assessment: suggest `data-collection`
    - If Front-loaded: suggest `detailed-assessment`
 
@@ -63,7 +63,7 @@ Before activating a skill, check the current state of the `working/` folder to d
    - Phase 300 may be complete
    - Suggest `generate-plans` if Phase 400 has not started
 
-Always check the Progress table in `engagement.md` for the definitive status of each phase.
+Always check the Progress table in `project.md` for the definitive status of each phase.
 
 ## Disambiguation
 

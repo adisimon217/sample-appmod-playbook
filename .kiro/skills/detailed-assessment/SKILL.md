@@ -199,7 +199,7 @@ Present the current decision status summary:
 
 ### Step 8 - Mark Phase 300 complete and proceed
 
-1. Update the Progress table in `working/{PROJECT}/engagement.md` to mark Phase 300 as "Complete".
+1. Update the Progress table in `working/{PROJECT}/project.md` to mark Phase 300 as "Complete".
 2. Present a summary of the key outcomes:
    - Applications assessed (count and names)
    - Execution paths assigned (how many PoC, EBA, full project)

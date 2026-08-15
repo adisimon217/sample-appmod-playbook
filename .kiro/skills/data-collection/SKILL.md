@@ -103,7 +103,7 @@ Wait for the validated inventory to be returned and updated at `working/{PROJECT
 
 Once the inventory is validated:
 
-1. Update the Progress table in `working/{PROJECT}/engagement.md` to mark Phase 100 as "Complete".
+1. Update the Progress table in `working/{PROJECT}/project.md` to mark Phase 100 as "Complete".
 2. Inform that data collection is finished.
 3. Recommend proceeding to feasibility analysis (Phase 200).
 

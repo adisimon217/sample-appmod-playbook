@@ -12,7 +12,7 @@ When skills reference templates, analysis rules, or samples from their `referenc
 
 ## Working folder conventions
 
-All project-specific work goes in `working/{PROJECT}/`. The engagement.md file in each project folder is the primary interface - it contains progress tracking with paths pre-filled for that project.
+All project-specific work goes in `working/{PROJECT}/`. The project.md file in each project folder is the primary interface - it contains progress tracking with paths pre-filled for that project.
 
 Output paths follow this pattern:
 - `working/{PROJECT}/100-data-collection/` - inventory

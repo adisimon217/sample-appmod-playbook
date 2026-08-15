@@ -4,12 +4,12 @@ Each project gets a subfolder. Start a new project by saying something like "I w
 
 ```
 working/{PROJECT}/
-  engagement.md                           # Runbook — progress tracking, links
+  project.md                              # Runbook — progress tracking, links
   reference/                              # Reference artefacts (read-only input)
   100-data-collection/
     {PROJECT}-App-Inventory.xlsx
   200-mod-feasibility/
-    {PROJECT}-Feasibility.md
+    {PROJECT}-Feasibility-Assessment.md
   300-detailed-assessment/
     {PROJECT}-{APP}-Questionnaire.md     # One per app
     {PROJECT}-{APP}-Architecture.md      # One per app with discussion points

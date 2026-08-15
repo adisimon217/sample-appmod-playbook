@@ -140,7 +140,7 @@ If ATX Codebase Analysis was used, note "ATX Codebase Analysis available" per ap
 
 ### Step 6 - Mark Phase 200 complete and proceed
 
-1. Update the Progress table in `working/{PROJECT}/engagement.md` to mark Phase 200 as "Complete".
+1. Update the Progress table in `working/{PROJECT}/project.md` to mark Phase 200 as "Complete".
 2. Present a summary of the key findings:
    - Total applications assessed
    - Pilot/PoC selection with rationale

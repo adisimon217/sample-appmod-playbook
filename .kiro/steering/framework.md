@@ -43,7 +43,7 @@ Each skill's `references/` folder contains the templates, analysis rules, and sa
 
 working/                          # Per-project work
   {PROJECT}/
-    engagement.md                 # Runbook with progress tracking
+    project.md                    # Runbook with progress tracking
     reference/
     100-data-collection/
     200-mod-feasibility/
@@ -57,6 +57,6 @@ working/                          # Per-project work
 ## Key Conventions
 
 - Skill reference files (`.kiro/skills/*/references/`) are read-only reference material - never modified during project work
-- The `engagement.md` in each project folder is the primary interface - contains progress tracking and all output paths
+- The `project.md` in each project folder is the primary interface - contains progress tracking and all output paths
 - Phase 200 reads the Excel inventory directly (excel-analysis skill) - no CSV export
 - All modernization plans should be decisive: one recommended approach per decision point

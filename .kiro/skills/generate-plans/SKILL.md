@@ -18,7 +18,7 @@ Determine the project name (`{PROJECT}`) from context.
 Verify that Phase 300 is complete by checking:
 1. The consolidated assessment exists at `working/{PROJECT}/300-detailed-assessment/{PROJECT}-Detailed-Assessment.md`
 2. Architecture working docs exist at `working/{PROJECT}/300-detailed-assessment/{PROJECT}-*-Architecture.md`
-3. The engagement tracker `working/{PROJECT}/engagement.md` shows Phase 300 as complete
+3. The engagement tracker `working/{PROJECT}/project.md` shows Phase 300 as complete
 
 If Phase 300 is not complete, inform the user and recommend completing the detailed assessment first.
 
@@ -199,7 +199,7 @@ Present a readiness summary:
 
 ### Step 8 - Mark Phase 400 complete
 
-1. Update the Progress table in `working/{PROJECT}/engagement.md` to mark Phase 400 as "Complete".
+1. Update the Progress table in `working/{PROJECT}/project.md` to mark Phase 400 as "Complete".
 2. Create a plan index file at `working/{PROJECT}/400-mod-plan/README.md` listing all generated plans with their type, application, and dependencies.
 3. Present a summary of all generated plans:
 

@@ -15,7 +15,7 @@
 | Phase | Status | Output |
 |-------|--------|--------|
 | 100 — Data Collection | ⬜ Not started | `100-data-collection/{PROJECT}-App-Inventory.xlsx` |
-| 200 — Mod Feasibility | ⬜ Not started | `200-mod-feasibility/{PROJECT}-Feasibility.md` |
+| 200 — Mod Feasibility | ⬜ Not started | `200-mod-feasibility/{PROJECT}-Feasibility-Assessment.md` |
 | 300 — Detailed Assessment | ⬜ Not started | `300-detailed-assessment/{PROJECT}-Detailed-Assessment.md` |
 | 400 — Mod Plan | ⬜ Not started | `400-mod-plan/` |
 
