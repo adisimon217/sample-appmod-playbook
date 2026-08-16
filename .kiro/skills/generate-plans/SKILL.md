@@ -1,26 +1,26 @@
 ---
 name: generate-plans
-description: Generate Phase 400 execution plans for all applications in the customer portfolio. Produces PoC plans (validate unknowns), EBA plans (6-week accelerated modernization), and full modernization plans (phased delivery for large/complex apps) in a single pass. Enforces correct sequencing - PoCs validate unknowns that EBAs depend on, EBAs establish patterns that full projects reuse. Includes post-generation readiness tracking via the EBA Preparation Checklist.
+description: Generate Phase 400 execution plans for all applications in the project portfolio. Produces PoC plans (validate unknowns), EBA plans (6-week accelerated modernization), and full modernization plans (phased delivery for large/complex apps) in a single pass. Enforces correct sequencing - PoCs validate unknowns that EBAs depend on, EBAs establish patterns that full projects reuse. Includes post-generation readiness tracking via the EBA Preparation Checklist.
 ---
 
 ## Workflow
 
-Follow these steps to generate all Phase 400 execution plans for a customer engagement. This skill produces all plan types in one pass, cross-referencing dependencies between them.
+Follow these steps to generate all Phase 400 execution plans for the project. This skill produces all plan types in one pass, cross-referencing dependencies between them.
 
-**Prerequisites:** Phase 300 must be complete. The `detailed-assessment` skill should have been run and the consolidated assessment finalized with architecture decisions resolved.
+**Prerequisites:** Phase 300 must be complete. The detailed assessment should have been run and the consolidated assessment finalized with architecture decisions resolved.
 
 **Plan sequencing principle:** PoC plans come first (they validate unknowns the EBA depends on). EBA plans come second (they establish patterns the full projects reuse). Full modernization plans come last (they reference patterns proven in earlier plans).
 
-### Step 1 - Identify customer and validate Phase 300 readiness
+### Step 1 - Identify the project and validate Phase 300 readiness
 
-Determine the customer name (`{CUSTOMER}`) from context.
+Determine the project name (`{PROJECT}`) from context.
 
 Verify that Phase 300 is complete by checking:
-1. The consolidated assessment exists at `working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-Detailed-Assessment.md`
-2. Architecture working docs exist at `working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-*-Architecture.md`
-3. The engagement tracker `working/{CUSTOMER}/engagement.md` shows Phase 300 as complete
+1. The consolidated assessment exists at `working/{PROJECT}/300-detailed-assessment/{PROJECT}-Detailed-Assessment.md`
+2. Architecture working docs exist at `working/{PROJECT}/300-detailed-assessment/{PROJECT}-*-Architecture.md`
+3. The engagement tracker `working/{PROJECT}/project.md` shows Phase 300 as complete
 
-If Phase 300 is not complete, inform the user and recommend invoking the `detailed-assessment` skill first.
+If Phase 300 is not complete, inform the user and recommend completing the detailed assessment first.
 
 Read the consolidated assessment and all architecture working docs to understand:
 - The execution path recommended for each application (PoC, EBA, or full project)
@@ -49,7 +49,7 @@ From the consolidated assessment, build a plan generation matrix:
 
 **Cross-cutting PoCs:** If multiple applications share the same EXPLORING decision (e.g., gMSA authentication), create a single PoC plan that covers all affected apps rather than duplicating the PoC per app.
 
-Present the classification to the user for confirmation:
+Present the classification for confirmation:
 
 > Based on the Phase 300 assessment, here is the plan generation matrix:
 >
@@ -61,7 +61,7 @@ Present the classification to the user for confirmation:
 >
 > Shall I proceed with generating all plans, or would you like to adjust any classifications?
 
-Wait for user confirmation before proceeding.
+Wait for confirmation before proceeding.
 
 ### Step 3 - Generate PoC plans
 
@@ -82,7 +82,7 @@ For each PoC plan:
 - "If PoC succeeds: proceed with {APP} EBA using validated pattern"
 - "If PoC fails: re-scope {APP} EBA to use fallback approach"
 
-Output each PoC plan as: `working/{CUSTOMER}/400-mod-plan/{CUSTOMER}-PoC-{TOPIC}.md`
+Output each PoC plan as: `working/{PROJECT}/400-mod-plan/{PROJECT}-PoC-{TOPIC}.md`
 
 ### Step 4 - Generate EBA plans
 
@@ -106,7 +106,7 @@ For each EBA plan:
 
 **Key principles for EBA plans (from the template):**
 - Be decisive: recommend ONE approach per decision point, not a menu of options
-- Use the customer's actual name, not "the customer"
+- Use the project's actual name, not generic placeholders
 - The plan should read as a clear execution blueprint, not a consulting options paper
 - Target state: .NET on Amazon ECS Fargate (Linux) + Aurora PostgreSQL (or SQL Server if DB is parked)
 - Target the latest .NET LTS version
@@ -116,7 +116,7 @@ For each EBA plan:
 - Note patterns it will establish that full project plans will reuse
 - Reference the pilot EBA if this is a subsequent Wave application
 
-Output each EBA plan as: `working/{CUSTOMER}/400-mod-plan/{CUSTOMER}-{APP}-EBA-Plan.md`
+Output each EBA plan as: `working/{PROJECT}/400-mod-plan/{PROJECT}-{APP}-EBA-Plan.md`
 
 ### Step 5 - Generate full modernization plans
 
@@ -140,7 +140,7 @@ There is no fixed template for full project plans. Structure them as:
 - Note which EBA-proven approaches apply directly vs which need adaptation
 - Identify cross-application dependencies with other plans being generated
 
-Output each full project plan as: `working/{CUSTOMER}/400-mod-plan/{CUSTOMER}-{APP}-Mod-Plan.md`
+Output each full project plan as: `working/{PROJECT}/400-mod-plan/{PROJECT}-{APP}-Mod-Plan.md`
 
 ### Step 6 - Cross-reference and dependency validation
 
@@ -160,7 +160,7 @@ After generating all plans, review the complete set for consistency:
    - "Depends on: {list of prerequisite plans}"
    - "Enables: {list of plans that depend on this one}"
 
-Present the dependency map to the user:
+Present the dependency map:
 
 > **Plan dependency map:**
 >
@@ -174,7 +174,7 @@ Present the dependency map to the user:
 
 ### Step 7 - Post-generation: EBA Preparation Checklist
 
-For each application with an EBA plan, walk the user through the EBA Preparation Checklist at `references/EBA-Preparation-Checklist.md`.
+For each application with an EBA plan, walk through the EBA Preparation Checklist at `references/EBA-Preparation-Checklist.md`.
 
 The checklist covers four phases of readiness:
 1. **Application Data Gathering** - Questionnaire validation, source access, assessment tools run
@@ -183,7 +183,7 @@ The checklist covers four phases of readiness:
 4. **EBA Day Readiness** - Assessments reviewed, target architecture agreed, success criteria defined
 
 For each EBA plan generated:
-1. Copy the checklist to `working/{CUSTOMER}/400-mod-plan/{CUSTOMER}-{APP}-EBA-Checklist.md`
+1. Copy the checklist to `working/{PROJECT}/400-mod-plan/{PROJECT}-{APP}-EBA-Checklist.md`
 2. Pre-populate items that are already satisfied based on Phase 300 work (questionnaire completed, architecture agreed, etc.)
 3. Highlight items that need immediate action before the EBA can start
 
@@ -199,12 +199,12 @@ Present a readiness summary:
 
 ### Step 8 - Mark Phase 400 complete
 
-1. Update the Progress table in `working/{CUSTOMER}/engagement.md` to mark Phase 400 as "Complete".
-2. Create a plan index file at `working/{CUSTOMER}/400-mod-plan/README.md` listing all generated plans with their type, application, and dependencies.
+1. Update the Progress table in `working/{PROJECT}/project.md` to mark Phase 400 as "Complete".
+2. Create a plan index file at `working/{PROJECT}/400-mod-plan/README.md` listing all generated plans with their type, application, and dependencies.
 3. Present a summary of all generated plans:
 
 > Phase 400 Modernization Plan generation is complete. All plans are saved in:
-> `working/{CUSTOMER}/400-mod-plan/`
+> `working/{PROJECT}/400-mod-plan/`
 >
 > **Generated plans:**
 > - PoC plans: {count} ({list topics})
@@ -217,7 +217,7 @@ Present a readiness summary:
 > 3. Full project plans (phased) - larger efforts reusing EBA-proven patterns
 >
 > **Next steps:**
-> - Review all plans with the customer for sign-off
+> - Review all plans for sign-off
 > - Complete the EBA Preparation Checklists for each EBA application
 > - Schedule PoCs first (they gate EBA start dates)
 > - Begin execution in wave order: Pilot/PoC first, then Wave 1, Wave 2, etc.

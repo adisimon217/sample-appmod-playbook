@@ -1,6 +1,6 @@
 # ModNet — .NET & SQL Server Modernization Framework
 
-Structured framework for AWS partners to assess, plan, and execute modernization of Windows workloads (.NET + SQL Server) to AWS.
+Framework for assessing, planning, and executing modernization of Windows workloads (.NET + SQL Server) to AWS.
 
 ## Framework Flow
 
@@ -21,26 +21,31 @@ graph TD
     style P4 fill:#2d6a4f,stroke:#1b4332,color:#fff
 ```
 
+## Getting Started
+
+Describe what you want to do in natural language. For example:
+
+- "I want to modernize my .NET applications"
+- "I have a portfolio of apps I want to assess for modernization"
+- "I have a specific application I want to migrate to AWS"
+- "I just want an assessment and recommendations"
+
+The framework will guide you through the appropriate phases based on your needs.
+
 ## Available Skills
 
-Skills are the primary way to interact with this framework. Each skill guides you through a specific phase with step-by-step instructions. Templates, analysis rules, and sample outputs are embedded in each skill's `references/` folder.
+Skills guide you through each phase with step-by-step instructions. Templates, analysis rules, and sample outputs are embedded in each skill's `references/` folder.
 
 | Skill | Phase | Description |
 |-------|-------|-------------|
-| `start-engagement` | Setup | Create the working folder structure, copy templates, determine engagement type |
+| `start-project` | Setup | Create the working folder structure, copy templates, determine project scope |
 | `data-collection` | 100 | Guide portfolio inventory collection using the App Inventory spreadsheet |
 | `feasibility-analysis` | 200 | Classify, score, and prioritize applications into modernization waves |
 | `detailed-assessment` | 300 | Per-application deep dive: questionnaires, architecture workshops, iterative refinement |
 | `generate-plans` | 400 | Produce PoC, EBA, and full modernization project plans for all applications |
 | `excel-analysis` | Utility | Read and analyze Excel spreadsheets (used by other skills for inventory data) |
 
-Invoke any skill by name (e.g., "run the data-collection skill" or "invoke generate-plans"). Skills are designed to be invoked in sequence, but each can also be run independently if prerequisites are met.
-
-## Getting Started
-
-To start a new customer engagement, invoke the `start-engagement` skill and provide the customer name. The skill will create the folder structure, copy templates, ask about the engagement type, and guide you on next steps.
-
-Once the engagement is set up, invoke skills in order: `data-collection` -> `feasibility-analysis` -> `detailed-assessment` -> `generate-plans`. Each skill picks up where the previous one left off.
+You do not need to invoke skills by name. Simply describe what you want to do and the appropriate skill will be activated automatically.
 
 ## Target State
 

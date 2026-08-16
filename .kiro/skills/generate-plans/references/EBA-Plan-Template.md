@@ -1,22 +1,22 @@
-# {CUSTOMER} {APP_NAME} — ModAx EBA Plan
+# {PROJECT} {APP_NAME} — ModAx EBA Plan
 
 <!--
   TEMPLATE INSTRUCTIONS
   =====================
   This template produces an EBA execution plan from a completed Pre-EBA Discovery Questionnaire
   and the ModNet Playbook. Replace all {PLACEHOLDERS} with actual values. Delete any sections
-  or rows that don't apply. Remove this instruction block before delivering to the customer.
+  or rows that don't apply. Remove this instruction block before finalizing.
 
   Inputs:
-  - Phase 300 consolidated assessment (working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-Detailed-Assessment.md)
-  - Architecture working doc (working/{CUSTOMER}/300-detailed-assessment/{CUSTOMER}-{APP}-Architecture.md)
+  - Phase 300 consolidated assessment (working/{PROJECT}/300-detailed-assessment/{PROJECT}-Detailed-Assessment.md)
+  - Architecture working doc (working/{PROJECT}/300-detailed-assessment/{PROJECT}-{APP}-Architecture.md)
   - [Detailed Analysis Rules](../../detailed-assessment/references/detailed-analysis.md) — decision matrices
   - [EBA Preparation Checklist](EBA-Preparation-Checklist.md)
 
   Principles:
   - Be decisive: recommend ONE approach per decision point, not a menu of options.
-    At most 2 alternatives only when the choice genuinely depends on unconfirmed customer input.
-  - Use the customer's actual name, not "the customer".
+    At most 2 alternatives only when the choice genuinely depends on unconfirmed input.
+  - Use the project's actual name, not generic placeholders.
   - The plan should read as a clear execution blueprint, not a consulting options paper.
   - Target state: .NET on Amazon ECS Fargate (Linux) + Aurora PostgreSQL (or SQL Server if DB is parked).
     Target the latest .NET LTS version — currently .NET 10.
@@ -24,7 +24,7 @@
 
 | | |
 |---|---|
-| Customer | {CUSTOMER} — {team/contact name} |
+| Project | {PROJECT} — {team/contact name} |
 | Application | {APP_NAME} ({brief description}) |
 | Criticality | {Critical / High / Medium / Low} |
 | Prepared by | AWS Team |
@@ -43,7 +43,7 @@
   5. Key finding — why the scope is (or isn't) realistic for a 6-week EBA
 -->
 
-{APP_NAME} is a {technology description} application running on {.NET Framework version} with {SQL Server version/edition} ({database size}). {CUSTOMER} has opted for a **{port / rewrite / hybrid}** approach, which aligns with the assessment findings — {brief rationale}.
+{APP_NAME} is a {technology description} application running on {.NET Framework version} with {SQL Server version/edition} ({database size}). {PROJECT} has opted for a **{port / rewrite / hybrid}** approach, which aligns with the assessment findings — {brief rationale}.
 
 **Database modernization {is proceeding / is parked}.** {If parked: explain why — e.g., cross-database joins, shared databases, complexity. If proceeding: state target is Aurora PostgreSQL and which migration tooling will be used per the Database Migration Tooling Decision Framework in the playbook.}
 
@@ -96,7 +96,7 @@
   - The entire UI layer for affected projects must go through Kiro + AI-DLC
   - Two paths: (1) Repurchase vendor's .NET Core edition + rewrite UI with new API,
     or (2) Full rewrite replacing vendor controls with standard ASP.NET Core MVC / SPA
-  - Either way, the UI WILL look different from legacy — communicate this to the customer upfront
+  - Either way, the UI WILL look different from legacy — communicate this upfront
   - License procurement (if repurchasing) must complete before EBA
   - Functional spec with user stories is mandatory for the rewrite path
   See Playbook Section 4 "Third-Party UI Component Decision Matrix" for full guidance.
@@ -213,7 +213,7 @@ Supporting AWS services (not shown): ECR, Secrets Manager, SSM Parameter Store, 
   - ASMX → REST API with SoapCore backward compatibility (if ASMX services exist)
   - Web Forms UI approach (Blazor via Transform vs MVC via Kiro/Transform Custom)
   - Third-party UI components (Telerik/DevExpress/Infragistics — repurchase or rewrite, Transform cannot port)
-  - Data access layer (EF Core / Dapper / raw SqlClient — pending customer confirmation if applicable)
+  - Data access layer (EF Core / Dapper / raw SqlClient — pending confirmation if applicable)
   - Cross-database joins (if DB parked and cross-DB queries exist)
   - Large file upload (S3 multipart upload)
   - Session state (in-memory → ElastiCache for scaling)
@@ -243,10 +243,10 @@ Supporting AWS services (not shown): ECR, Secrets Manager, SSM Parameter Store, 
 
 <!--
   This section is critical. The dev environment must be ready BEFORE the EBA Party.
-  Adapt based on the customer's development approach (local laptops, shared dev VMs, cloud dev env).
+  Adapt based on your team's development approach (local laptops, shared dev VMs, cloud dev env).
 -->
 
-{CUSTOMER}'s development approach: {describe how developers will work — e.g., "developers load the application locally on their laptops and connect to shared remote dependencies"}.
+{PROJECT}'s development approach: {describe how developers will work — e.g., "developers load the application locally on their laptops and connect to shared remote dependencies"}.
 
 ### Local Development Environment (per developer laptop)
 
@@ -276,7 +276,7 @@ Supporting AWS services (not shown): ECR, Secrets Manager, SSM Parameter Store, 
 ### Windows + Linux Container Gotchas
 
 <!--
-  Include these standard items. Add any customer-specific gotchas.
+  Include these standard items. Add any project-specific gotchas.
 -->
 
 - **Docker context:** Ensure Docker is using the WSL 2 backend (not Hyper-V). In Docker Desktop: Settings → General → "Use the WSL 2 based engine".
@@ -298,7 +298,7 @@ Supporting AWS services (not shown): ECR, Secrets Manager, SSM Parameter Store, 
 - [ ] Can reach external dependencies from local machine (list each)
 - [ ] Git configured with `core.autocrlf=input`
 - [ ] Kiro installed and functional
-- [ ] AWS CLI installed and configured with {CUSTOMER}'s AWS account credentials
+- [ ] AWS CLI installed and configured with {PROJECT}'s AWS account credentials
 - [ ] WSL 2 installed and running (`wsl --status`)
 - [ ] Docker Desktop installed, using WSL 2 backend
 - [ ] Can build and run a sample .NET 10 Linux container locally
@@ -332,10 +332,10 @@ This checklist must be completed by all EBA participants prior to the EBA Party.
 
 ---
 
-## ⚠️ Pending Decisions ({CUSTOMER} to Confirm)
+## ⚠️ Pending Decisions (To Confirm)
 
 <!--
-  List decisions that the customer must make before EBA.
+  List decisions that your team must make before EBA.
   Common pending decisions:
   - UI approach (Blazor vs MVC)
   - Data access layer (EF Core / Dapper / raw SqlClient)
@@ -353,14 +353,14 @@ This checklist must be completed by all EBA participants prior to the EBA Party.
 ## ⚠️ Unvalidated Assumptions
 
 <!--
-  List assumptions made by the AWS team that have not been confirmed by the customer.
+  List assumptions made by the AWS team that have not been confirmed by your team.
   These typically come from:
   - Inferences from architecture diagrams
   - Default assumptions for unanswered questionnaire questions
   - Technical assumptions about the codebase
 -->
 
-This plan is based on the pre-EBA discovery questionnaire responses. Several answers were inferred by the AWS team and have not yet been validated by {CUSTOMER}.
+This plan is based on the pre-EBA discovery questionnaire responses. Several answers were inferred and have not yet been validated by {PROJECT}.
 
 | # | Questionnaire Ref | Assumption | Impact if Incorrect |
 |---|-------------------|-----------|-------------------|
@@ -368,4 +368,4 @@ This plan is based on the pre-EBA discovery questionnaire responses. Several ans
 
 Additionally, for any questionnaire questions that remain unanswered, the default assumption is "not used / not applicable" and therefore not factored into this plan. If any of these unanswered items turn out to be relevant, the plan will need to be revised accordingly.
 
-{CUSTOMER} should provide corrections or confirmations for all unconfirmed questionnaire answers prior to EBA. Any material change will trigger a plan revision.
+{PROJECT} team should provide corrections or confirmations for all unconfirmed questionnaire answers prior to EBA. Any material change will trigger a plan revision.

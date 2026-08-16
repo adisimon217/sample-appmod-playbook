@@ -4,7 +4,7 @@ This document defines the complete analysis methodology for Phase 200 — Modern
 
 ## Inventory Reference
 
-The input is the customer's completed `App-Inventory.xlsx` from Phase 100. It contains two data worksheets (row 1 = headers, row 2 onward = data). The columns and their example values are listed below so the analysis steps can reference them precisely.
+The input is the completed `App-Inventory.xlsx` from Phase 100. It contains two data worksheets (row 1 = headers, row 2 onward = data). The columns and their example values are listed below so the analysis steps can reference them precisely.
 
 ### Applications Worksheet
 
@@ -149,13 +149,13 @@ Use this output as **primary evidence** for:
 
 **How to run:**
 
-Copy `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml` to `working/{CUSTOMER}/200-mod-feasibility/atxconfig-coda.yaml`, then execute:
+Copy `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml` to `working/{PROJECT}/200-mod-feasibility/atxconfig-coda.yaml`, then execute:
 
 ```
 atx custom def exec -t -n AWS/comprehensive-codebase-analysis -g file://atxconfig-coda.yaml -p /path/to/repository
 ```
 
-Runtime: 45 minutes to 2+ hours per application. Save the output alongside the feasibility assessment in `working/{CUSTOMER}/200-mod-feasibility/`.
+Runtime: 45 minutes to 2+ hours per application. Save the output alongside the feasibility assessment in `working/{PROJECT}/200-mod-feasibility/`.
 
 If this accelerator is used, note it in the output as "✅ ATX Codebase Analysis available" per application, and reference specific findings from the analysis report when assigning complexity scores and pathway recommendations.
 

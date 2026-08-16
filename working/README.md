@@ -1,26 +1,26 @@
-# Working — Customer Engagements
+# Working — Modernization Projects
 
-Each customer gets a subfolder. Start a new engagement using the prompt in the [root README](../README.md).
+Each project gets a subfolder. Start a new project by saying something like "I want to modernize my .NET applications".
 
 ```
-working/{CUSTOMER}/
-  engagement.md                           # Runbook — prompts, status, links
-  reference/                              # Customer-provided artefacts (read-only input)
+working/{PROJECT}/
+  project.md                              # Runbook — progress tracking, links
+  reference/                              # Reference artefacts (read-only input)
   100-data-collection/
-    {CUSTOMER}-App-Inventory.xlsx
+    {PROJECT}-App-Inventory.xlsx
   200-mod-feasibility/
-    {CUSTOMER}-Feasibility.md
+    {PROJECT}-Feasibility-Assessment.md
   300-detailed-assessment/
-    {CUSTOMER}-{APP}-Questionnaire.md     # One per app
-    {CUSTOMER}-{APP}-Architecture.md      # One per app with discussion points
-    {CUSTOMER}-Detailed-Assessment.md     # Consolidated output
+    {PROJECT}-{APP}-Questionnaire.md     # One per app
+    {PROJECT}-{APP}-Architecture.md      # One per app with discussion points
+    {PROJECT}-Detailed-Assessment.md     # Consolidated output
     meetings/                             # Raw meeting notes, photos, transcripts
   400-mod-plan/
-    {CUSTOMER}-PoC-{TOPIC}.md             # PoC plans
-    {CUSTOMER}-{APP}-EBA-Plan.md          # EBA plans
-    {CUSTOMER}-{APP}-Mod-Plan.md          # Full project plans
+    {PROJECT}-PoC-{TOPIC}.md             # PoC plans
+    {PROJECT}-{APP}-EBA-Plan.md          # EBA plans
+    {PROJECT}-{APP}-Mod-Plan.md          # Full project plans
 ```
 
 DISCLAIMER:
 
-The sample folder contains artefacts that pertains to a fictitious customer to serve as an example of how to use this framework.
+The sample folder contains artefacts that pertain to a fictitious project to serve as an example of how to use this framework.

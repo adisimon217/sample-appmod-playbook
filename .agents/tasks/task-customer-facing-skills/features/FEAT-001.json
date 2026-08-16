@@ -1,0 +1,50 @@
+{
+  "id": "FEAT-001",
+  "type": "refactor",
+  "description": "Rename start-engagement to start-project, create skill-activation.md steering file, remove hooks, and convert all skills/steering/README to customer-facing language. This is the entire transformation in one coherent unit.",
+  "status": "completed",
+  "steps": [
+    "Create a new git branch 'feat/customer-facing-skills' from main",
+    "Delete the .kiro/hooks/ directory entirely (3 files: sync-architecture-to-plan.kiro.hook, sync-questionnaire-docs.kiro.hook, sync-questionnaires.kiro.hook)",
+    "Rename .kiro/skills/start-engagement/ directory to .kiro/skills/start-project/ (move all contents including references/)",
+    "Rename .kiro/skills/start-project/references/engagement-template.md to .kiro/skills/start-project/references/project-template.md",
+    "Rewrite .kiro/skills/start-project/SKILL.md: change frontmatter name to 'start-project', change description to customer-facing language about starting a modernization project, replace {CUSTOMER} with {PROJECT} throughout, remove partner language ('walk the customer through', 'send to customer'), change Step 1 from asking customer name to asking project name, restructure Step 5 to use natural questions about user intent (portfolio vs specific app vs assessment only) instead of presenting formal engagement types",
+    "Rewrite .kiro/skills/start-project/references/project-template.md: rename from engagement-template, change {CUSTOMER} to {PROJECT} throughout, change all partner-facing language to first-person customer-facing language, remove 'Invoke Kiro skills' instructions since skill-activation.md handles routing",
+    "Update .kiro/skills/data-collection/SKILL.md: replace all {CUSTOMER} with {PROJECT}, change 'customer engagement' to 'project', change 'Send the blank spreadsheet template to the customer' to direct language like 'Fill out the inventory spreadsheet', change 'Walk through it in a 30-minute call' to 'Review it together in a 30-minute session', change 'let them complete async' to 'complete it offline', change all partner-to-customer language to direct/first-person language",
+    "Update .kiro/skills/feasibility-analysis/SKILL.md: replace all {CUSTOMER} with {PROJECT}, change 'customer engagement' to 'project', change all 'ask the customer' to direct language, remove partner-facing instructions",
+    "Update .kiro/skills/detailed-assessment/SKILL.md: replace all {CUSTOMER} with {PROJECT}, change 'customer engagement' to 'project', change 'Walk the customer through' to direct language, change 'send it to the customer' to direct language, remove partner-intermediary language",
+    "Update .kiro/skills/generate-plans/SKILL.md: replace all {CUSTOMER} with {PROJECT}, change 'customer' references to 'your team' or direct language, remove partner-facing language",
+    "Update .kiro/skills/excel-analysis/SKILL.md: no {CUSTOMER} references expected but verify and update any if found",
+    "Rewrite .kiro/steering/framework.md: remove 'Structured modernization framework for AWS partners', change to customer-facing description, update skill table (start-engagement -> start-project), change {CUSTOMER} to {PROJECT} in workspace structure, remove 'Each customer engagement starts by invoking', remove manual skill invocation instructions (routing logic goes to skill-activation.md), keep it lean - just describes the framework structure",
+    "Create .kiro/steering/skill-activation.md with inclusion: always. Map natural language intents to skills: 'I want to modernize my application' -> start-project, 'I want to assess my portfolio' -> start-project, 'I have an inventory ready' -> data-collection, 'analyze feasibility' -> feasibility-analysis, 'detailed assessment' -> detailed-assessment, 'generate plans' -> generate-plans. Include workspace state detection (check what exists in working/ to determine phase). Users never say skill names.",
+    "Update .kiro/steering/workspace-rules.md: change {CUSTOMER} to {PROJECT} throughout, remove hook references, change 'customer-specific work' to 'project work', change 'customer-provided artefacts' to 'reference artefacts'",
+    "Update .kiro/steering/methodology.md: change partner-facing language to customer-facing, change 'customer' to 'your team' where referring to the user, keep technical content intact",
+    "Update .kiro/steering/formatting.md: change 'customer's actual name' to 'project name' or similar, minimal changes needed",
+    "Update README.md: change 'Structured framework for AWS partners' to customer-facing description, change 'start a new customer engagement' to natural language examples like 'I want to modernize my .NET applications', update skill table references (start-engagement -> start-project), remove partner-specific language",
+    "Update working/README.md: change {CUSTOMER} to {PROJECT} throughout, update language to be customer-facing",
+    "Commit all changes with message 'refactor: convert to customer-facing language and rename start-engagement to start-project'"
+  ],
+  "acceptance_criteria": [
+    "Directory .kiro/skills/start-engagement/ no longer exists",
+    "Directory .kiro/skills/start-project/ exists with SKILL.md and references/project-template.md",
+    "Directory .kiro/hooks/ no longer exists",
+    "File .kiro/steering/skill-activation.md exists with inclusion: always and maps natural language intents to skills",
+    "No occurrences of '{CUSTOMER}' in any file under .kiro/ (replaced with {PROJECT})",
+    "No occurrences of 'start-engagement' in any file (replaced with start-project)",
+    "No partner-facing language remains ('walk the customer through', 'send to customer for validation', 'AWS partners')",
+    "The start-project skill asks about project scope via natural questions that determine engagement type",
+    "All files are committed on the feat/customer-facing-skills branch"
+  ],
+  "verification": [
+    "Run: grep -r '{CUSTOMER}' .kiro/ and confirm zero matches",
+    "Run: grep -r 'start-engagement' . --include='*.md' and confirm zero matches",
+    "Run: ls .kiro/skills/start-project/SKILL.md and confirm exists",
+    "Run: ls .kiro/skills/start-project/references/project-template.md and confirm exists",
+    "Run: test ! -d .kiro/hooks && echo 'hooks removed' and confirm output",
+    "Run: ls .kiro/steering/skill-activation.md and confirm exists",
+    "Run: git log --oneline -1 and confirm commit message",
+    "Run: grep -r 'walk the customer' .kiro/ and confirm zero matches"
+  ],
+  "blocked_reason": null,
+  "findings": "All {CUSTOMER} references replaced with {PROJECT} including in skill references/ template files. Partner-facing language removed from all skills, steering files, and README. The skill-activation.md steering file maps natural language intents to skills with workspace state detection. Sample output files in references/sample-output/ were left mostly untouched since they use fictional app/project names (not partner language). The word 'customer' remains only in technical contexts like 'customer data model' in sample outputs."
+}

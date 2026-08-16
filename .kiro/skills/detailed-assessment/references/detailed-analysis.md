@@ -8,7 +8,7 @@
 
 **Target State:** .NET on Amazon ECS Fargate (Linux) + Amazon Aurora PostgreSQL. Target the latest .NET LTS version (currently .NET 10).
 
-**Plan Decisiveness:** When generating modernization plans from this playbook, be decisive — recommend one approach per decision point, not a menu of options. At most present 2 alternatives only when the choice genuinely depends on customer input that hasn't been gathered yet. The EBA plan should read as a clear execution blueprint, not a consulting options paper.
+**Plan Decisiveness:** When generating modernization plans from this playbook, be decisive — recommend one approach per decision point, not a menu of options. At most present 2 alternatives only when the choice genuinely depends on input that hasn't been gathered yet. The EBA plan should read as a clear execution blueprint, not a consulting options paper.
 
 ---
 
@@ -78,7 +78,7 @@
 | IIS URL Rewrite | Medium | Convert to ASP.NET Core middleware or YARP reverse proxy rules. |
 | Custom IIS modules / ISAPI | Blocker | Rewrite as ASP.NET Core middleware. |
 | IIS virtual directories | Medium | Map to ASP.NET Core path-based routing or separate ECS services. |
-| Windows Auth via IIS | High | Replace with OIDC/OAuth 2.0 (Amazon Cognito or customer's IdP). If AD is required, use LDAP over Linux or AWS Managed Microsoft AD. |
+| Windows Auth via IIS | High | Replace with OIDC/OAuth 2.0 (Amazon Cognito or your IdP). If AD is required, use LDAP over Linux or AWS Managed Microsoft AD. |
 | web.config handlers / machine keys | Medium | Migrate to ASP.NET Core configuration + AWS Secrets Manager for keys. |
 
 
@@ -115,18 +115,18 @@ AWS Transform for .NET cannot port third-party UI controls (Telerik, DevExpress,
 
 | Scenario | Approach | Tool | EBA Impact | Pre-requisites |
 |----------|----------|------|------------|----------------|
-| Vendor offers .NET Core / ASP.NET Core edition AND customer is willing to repurchase | **Repurchase + Rewrite UI layer** using vendor's modern controls | Kiro + AI-DLC | High — new control APIs differ significantly from legacy; UI will look different | License procurement must complete before EBA (weeks 1–2). Customer must accept that UI will differ from legacy. |
-| Vendor offers modern edition BUT customer is unwilling to repurchase | **Full rewrite** replacing vendor controls with standard ASP.NET Core MVC (Razor/Tag Helpers) or SPA (React) + Web API | Kiro + AI-DLC | High — all vendor-dependent UI pages must be rewritten from scratch | Functional spec with user stories for affected pages (weeks 1–2). Customer must accept UI will look different. |
-| Vendor does NOT offer a .NET Core / ASP.NET Core edition | **Full rewrite** replacing vendor controls with standard ASP.NET Core MVC or SPA (React) + Web API | Kiro + AI-DLC | High — no migration path exists, full rewrite is the only option | Functional spec with user stories for affected pages (weeks 1–2). Customer must accept UI will look different. |
+| Vendor offers .NET Core / ASP.NET Core edition AND your team is willing to repurchase | **Repurchase + Rewrite UI layer** using vendor's modern controls | Kiro + AI-DLC | High — new control APIs differ significantly from legacy; UI will look different | License procurement must complete before EBA (weeks 1–2). Your team must accept that UI will differ from legacy. |
+| Vendor offers modern edition BUT your team is unwilling to repurchase | **Full rewrite** replacing vendor controls with standard ASP.NET Core MVC (Razor/Tag Helpers) or SPA (React) + Web API | Kiro + AI-DLC | High — all vendor-dependent UI pages must be rewritten from scratch | Functional spec with user stories for affected pages (weeks 1–2). Your team must accept UI will look different. |
+| Vendor does NOT offer a .NET Core / ASP.NET Core edition | **Full rewrite** replacing vendor controls with standard ASP.NET Core MVC or SPA (React) + Web API | Kiro + AI-DLC | High — no migration path exists, full rewrite is the only option | Functional spec with user stories for affected pages (weeks 1–2). Your team must accept UI will look different. |
 | Third-party components are in non-UI layers (e.g., PDF generation, charting libraries) | **Replace with .NET Core-compatible alternatives** (e.g., QuestPDF, SkiaSharp, ClosedXML) | Kiro + AI-DLC | Medium — API surface is typically smaller than UI controls | Identify replacement libraries in weeks 1–2. |
 
 #### Key Principles
 
 - **AWS Transform is off the table** for any project that uses third-party UI components. The entire UI layer for those projects must go through Kiro + AI-DLC.
-- **The UI will look different.** This is non-negotiable and must be communicated to the customer upfront. Legacy Telerik/DevExpress Web Forms controls have no visual equivalent in modern ASP.NET Core.
+- **The UI will look different.** This is non-negotiable and must be communicated upfront. Legacy Telerik/DevExpress Web Forms controls have no visual equivalent in modern ASP.NET Core.
 - **Scope carefully for EBA.** If the application is heavily dependent on third-party controls (e.g., complex grids, schedulers, editors on every page), the 2-day EBA should target a vertical slice — a few representative pages — not the full UI.
 - **Functional spec is mandatory** for the rewrite path. Without it, the EBA team will waste time reverse-engineering legacy control behavior. Develop the spec in weeks 1–2 using Kiro + AI-DLC by analyzing the legacy code.
-- **License procurement is a blocker** for the repurchase path. If the customer chooses to repurchase, the modern license must be in hand before the EBA Party. This cannot be resolved during the 2-day.
+- **License procurement is a blocker** for the repurchase path. If you choose to repurchase, the modern license must be in hand before the EBA Party. This cannot be resolved during the 2-day.
 
 #### Impact on EBA Pilot Selection
 
@@ -198,7 +198,7 @@ If the best pilot candidate has third-party UI components, scope the EBA to back
 | 9.3 | Deployment process | Per app | **Manual** → high value in automating during EBA. **Automated** → adapt existing pipeline to deploy to ECS. |
 | 9.4 | Environments | Per app | Maps to AWS account/environment strategy. Identical environments → use CDK/CloudFormation for consistency. |
 | 9.5 | Deployment frequency | Per app | **Daily/weekly** → team is agile, EBA will be smoother. **Quarterly** → team may need more guidance during the 2-day. Also serves as a baseline metric — post-modernization deployment frequency should improve. |
-| 9.6 | Container / Linux experience | Per team | **Yes** → team can contribute to Dockerfile creation and ECS config during EBA. **No** → AWS team leads containerization, customer team observes and learns. Allocate training time in weeks 1-2. |
+| 9.6 | Container / Linux experience | Per team | **Yes** → team can contribute to Dockerfile creation and ECS config during EBA. **No** → AWS team leads containerization, your team observes and learns. Allocate training time in weeks 1-2. |
 
 ---
 
@@ -208,8 +208,8 @@ If the best pilot candidate has third-party UI components, scope the EBA to back
 |----|----------|-------|-------------------|
 | 10.1 | In-house or vendor | Per app | **Vendor-maintained** → vendor must participate in EBA or provide full knowledge transfer before. **In-house** → direct access to developers. |
 | 10.2 | Source code available | Per app | **No** → BLOCKER. Cannot proceed with EBA without source code access. Must be resolved in week 1. |
-| 10.3 | Number of developers | Per app | Determines EBA team size. Ideally 2-4 developers from customer side for the 2-day. |
-| 10.4 | .NET proficiency | Per team | **Advanced** → team can pair-program during EBA. **Beginner** → AWS team drives, customer observes. Factor into sprint planning. |
+| 10.3 | Number of developers | Per app | Determines EBA team size. Ideally 2-4 developers from your team for the 2-day. |
+| 10.4 | .NET proficiency | Per team | **Advanced** → team can pair-program during EBA. **Beginner** → AWS team drives, your team observes. Factor into sprint planning. |
 | 10.5 | PostgreSQL experience | Per team | **None** → allocate training time in weeks 1-2. Provide Aurora PostgreSQL cheat sheet for SQL Server developers. |
 | 10.6 | SMEs for EBA | Per app | Must have: app developer, DBA, infra/DevOps. Missing any role → risk to EBA success. Business owner on standby for decisions. |
 | 10.7 | Known blockers | Per app | Document and triage. Blockers must be resolved before EBA Party. Risks should have mitigation plans. |
@@ -220,8 +220,8 @@ If the best pilot candidate has third-party UI components, scope the EBA to back
 
 | Q# | Question | Scope | How It Drives EBA |
 |----|----------|-------|-------------------|
-| 11.1 | Customer's own effort estimate | Per app | **Baseline for proof of value.** If customer estimates 12 months with 5 developers, and EBA achieves a working pilot in 6 weeks with 2-3 people, that's a compelling story. Document this before and after. |
-| 11.2 | Preferred target architecture | Per app | Validates alignment with AWS recommendation. **ECS/Fargate** → default path. **EKS** → only if customer has Kubernetes experience (see 9.6). **Lambda** → only for event-driven components. **EC2 Linux** → fallback if containers are too complex for the pilot. |
+| 11.1 | Own effort estimate | Per app | **Baseline for proof of value.** If you estimate 12 months with 5 developers, and EBA achieves a working pilot in 6 weeks with 2-3 people, that's a compelling story. Document this before and after. |
+| 11.2 | Preferred target architecture | Per app | Validates alignment with AWS recommendation. **ECS/Fargate** → default path. **EKS** → only if your team has Kubernetes experience (see 9.6). **Lambda** → only for event-driven components. **EC2 Linux** → fallback if containers are too complex for the pilot. |
 | 11.3 | Success criteria | Per app | Defines the EBA demo acceptance criteria. Must be agreed before the 2-day. Examples: "App running on ECS with Aurora PostgreSQL, passing all unit tests, accessible via ALB." |
 | 11.4 | Annual licensing costs | Per app | **Proof of value calculation.** Windows Server + SQL Server Enterprise licensing can be $50K–$500K+/year. Moving to Linux containers + Aurora PostgreSQL eliminates these costs. Include in the EBA debrief presentation. |
 

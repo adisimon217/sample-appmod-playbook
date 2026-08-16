@@ -10,7 +10,7 @@
 
 ## Phase 1 — Application Data Gathering
 
-This is the first activity. The customer team completes the questionnaire using the tools referenced in its appendices.
+This is the first activity. Your team completes the questionnaire using the tools referenced in its appendices.
 
 - [ ] Questionnaire completed for each application in scope
 - [ ] Questionnaire responses validated by the application SME
