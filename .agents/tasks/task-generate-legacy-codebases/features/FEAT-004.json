@@ -1,0 +1,38 @@
+{
+  "id": "FEAT-004",
+  "type": "feat",
+  "description": "Generate ReconcEngine (APP-004) synthetic legacy codebase - Console App + 2 Windows Services on .NET Framework 4.8, Dapper micro-ORM, Serilog, xUnit tests (~60% coverage on ReconCore), CsvHelper, Polly, PGP encrypted settlement file processing, file share dependencies. This is described as the 'cleanest app' - well-structured code. ~35K LoC (representative 2-3K lines).",
+  "status": "completed",
+  "steps": [
+    "Create working/sample/legacy-codebases/ReconcEngine/ directory with solution structure: ReconcEngine.Console, ReconcEngine.FileWatcher (Windows Service), ReconcEngine.RetryHandler (Windows Service), ReconcEngine.Core, ReconcEngine.Models, ReconcEngine.Tests",
+    "Create ReconcEngine.sln solution file referencing all 5 projects + test project",
+    "Create ReconcEngine.Console.csproj (.NET Framework 4.8, Console App) with Program.cs entry point, ReconciliationOrchestrator class that coordinates the matching engine. App.config with connection strings (ReconcDB, PayGateDB read-only), file paths (\\\\fileserver\\settlements\\, \\\\fileserver\\recon-reports\\), Serilog config",
+    "Create ReconcEngine.FileWatcher.csproj (Windows Service) with FileSystemWatcher monitoring \\\\fileserver\\settlements\\, ServiceBase implementation, installer class (ProjectInstaller.cs)",
+    "Create ReconcEngine.RetryHandler.csproj (Windows Service) with Timer-based polling every 30 mins, retries failed reconciliation matches up to 3 times with Polly retry policy, ServiceBase implementation",
+    "Create ReconcEngine.Core.csproj (class library) with well-structured business logic: ReconciliationEngine, TransactionMatcher, SettlementFileParser (CsvHelper), PgpDecryptor (PGP file decryption stubs), DiscrepancyDetector, ReportGenerator (CSV output). Clean separation of concerns (this was rewritten by a good developer)",
+    "Create ReconcEngine.Models.csproj (class library) with domain models: Transaction, SettlementRecord, ReconciliationResult, DiscrepancyReport, BatchRun, MatchResult",
+    "Create ReconcEngine.Tests.csproj (xUnit) with representative tests covering ReconCore: TransactionMatcherTests, SettlementFileParserTests, DiscrepancyDetectorTests, ReconciliationEngineTests. Show good test coverage patterns (~60%)",
+    "Create Data access layer in Core project using Dapper: ReconcRepository, TransactionRepository (reads PayGateDB), BatchRunRepository. Clean parameterized SQL queries",
+    "Create SQL scripts folder with 12 stored procedures for ReconcDB: CRUD operations, reporting queries, nightly cleanup job",
+    "Create packages.config files with: Serilog, Serilog.Sinks.File, Serilog.Sinks.EventLog, Dapper, CsvHelper, Polly, xunit, xunit.runner.visualstudio, Moq"
+  ],
+  "acceptance_criteria": [
+    "ReconcEngine.sln exists with all 6 projects",
+    "Console app has clear orchestration pattern (well-architected)",
+    "Two Windows Service projects with ServiceBase implementations and ProjectInstaller",
+    "Dapper used for data access (not EF) with parameterized SQL",
+    "CsvHelper used for settlement file parsing",
+    "Polly used for retry logic in RetryHandler",
+    "Serilog configured in app.config",
+    "UNC paths (\\\\fileserver\\...) referenced in configuration and code",
+    "xUnit test project with representative tests showing ~60% coverage pattern",
+    "PGP decryption stubs present"
+  ],
+  "verification": [
+    "Verify directory structure shows 6 project folders",
+    "Verify .sln references all projects",
+    "Verify test project has xUnit tests with meaningful test coverage of Core"
+  ],
+  "blocked_reason": null,
+  "findings": "Generated 63 files, 4397 lines total. Solution has 6 projects (Console, FileWatcher, RetryHandler, Core, Models, Tests), 12 stored procedures, clean code patterns with interfaces, DI via constructor, Polly retry policies, Serilog structured logging, Dapper parameterized SQL, CsvHelper, PGP decryption stubs, and comprehensive xUnit tests with Moq."
+}
