@@ -1,0 +1,35 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Generate BackOffice (APP-003) synthetic legacy codebase - ASP.NET WebForms on .NET Framework 4.5, Telerik RadControls, Windows Auth via IIS, ADO.NET (raw SQL, no ORM), Custom IIS Modules, Registry dependencies, 0% test coverage. ~90K LoC (representative 2-3K lines).",
+  "status": "completed",
+  "steps": [
+    "Create working/sample/legacy-codebases/BackOffice/ directory with solution structure: BackOffice.Web, BackOffice.Business, BackOffice.DataAccess, BackOffice.IISModules",
+    "Create BackOffice.sln solution file",
+    "Create BackOffice.Web.csproj (.NET Framework 4.5, ASP.NET WebForms) with packages.config referencing Telerik.Web.UI, web.config with Windows Auth (Negotiate/NTLM), custom IIS module registration, machineKey",
+    "Create WebForms pages (.aspx + .aspx.cs code-behind): Default.aspx, TransactionMonitor.aspx (with Telerik RadGrid), DisputeManagement.aspx (RadWindow, RadPanelBar), MerchantOnboarding.aspx (RadWizard), Reports.aspx (RadChart), UserAdmin.aspx. Demonstrate code-behind pattern with business logic directly in event handlers",
+    "Create BackOffice.Business.csproj (class library) with business logic classes that mix data access and business rules (legacy anti-pattern)",
+    "Create BackOffice.DataAccess.csproj (class library) with raw ADO.NET: SqlConnection, SqlCommand, SqlDataReader patterns. DataAccessHelper class with static methods, inline SQL strings (not parameterized in some cases - legacy anti-pattern), connection string from ConfigurationManager",
+    "Create BackOffice.IISModules.csproj (class library) with custom IHttpModule implementations: AuditModule (logs all requests), SecurityHeaderModule, SessionValidationModule. Reference Windows Registry for configuration",
+    "Create SQL scripts folder with representative stored procedures (20-30 of the 150) for transaction monitoring, dispute management, merchant onboarding, reporting",
+    "Create web.config with Windows Auth section, custom HTTP modules section, Telerik handler registrations, session state, trace settings",
+    "Add references to System.Web, System.Data, Microsoft.Win32 (Registry), and demonstrate Registry.GetValue calls in configuration"
+  ],
+  "acceptance_criteria": [
+    "BackOffice.sln exists with all projects",
+    "WebForms .aspx pages with code-behind files exist showing Telerik RadControls usage",
+    "web.config has Windows Authentication mode, custom IIS module entries",
+    "ADO.NET raw SQL patterns visible (no EF or Dapper)",
+    "Custom IHttpModule implementations exist",
+    "Registry access code present",
+    "No test project (0% coverage as documented)",
+    "Telerik.Web.UI referenced in packages.config"
+  ],
+  "verification": [
+    "Verify directory structure and file presence",
+    "Verify web.config has authentication mode=Windows",
+    "Verify .aspx files reference Telerik controls in markup"
+  ],
+  "blocked_reason": null,
+  "findings": "Generated 57 files totaling ~4,810 lines across 4 projects (BackOffice.Web, BackOffice.Business, BackOffice.DataAccess, BackOffice.IISModules) plus Database scripts. All acceptance criteria verified: .sln references 4 projects, targets .NET Framework 4.5, WebForms with code-behind pattern, Telerik RadControls (RadGrid in TransactionMonitor/UserAdmin, RadWindow in DisputeManagement/TransactionMonitor, RadPanelBar in DisputeManagement/NavigationMenu, RadWizard in MerchantOnboarding, RadHtmlChart in Reports). Web.config has authentication mode=Windows with Negotiate/NTLM providers, custom IIS modules (AuditModule, SecurityHeaderModule, SessionValidationModule), Telerik handler registrations, trace settings. DataAccessHelper is a static class with ExecuteReader/ExecuteNonQuery/ExecuteScalar taking raw SQL strings. Multiple SQL injection vulnerabilities demonstrated via string concatenation in WHERE clauses. Registry access via Microsoft.Win32.Registry in ConnectionManager and RegistryConfigReader. Business layer mixes data access with business logic (anti-pattern). No test project (0% coverage). 15 stored procedures in Database folder. Code-behind files have business logic directly in event handlers (Page_Load, Button_Click, RadGrid_NeedDataSource, etc.)."
+}
