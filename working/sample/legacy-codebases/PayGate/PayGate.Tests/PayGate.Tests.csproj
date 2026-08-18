@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6F7A8B9C-0D1E-2345-FA67-BC89DE01FA23}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PayGate.Tests</RootNamespace>
+    <AssemblyName>PayGate.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\MSTest.TestFramework.2.2.10\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\MSTest.TestFramework.2.2.10\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.18.2.0, Culture=neutral, PublicKeyToken=69f491c39445e920">
+      <HintPath>..\packages\Moq.4.18.2\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\PaymentProcessingServiceTests.cs" />
+    <Compile Include="Services\SettlementServiceTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PayGate.Core\PayGate.Core.csproj">
+      <Project>{2B3C4D5E-6F7A-8901-BC23-DE45FA67BC89}</Project>
+      <Name>PayGate.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PayGate.Data\PayGate.Data.csproj">
+      <Project>{3C4D5E6F-7A8B-9012-CD34-EF56AB78CD90}</Project>
+      <Name>PayGate.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PayGate.Integration\PayGate.Integration.csproj">
+      <Project>{5E6F7A8B-9C0D-1234-EF56-AB78CD90EF12}</Project>
+      <Name>PayGate.Integration</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
