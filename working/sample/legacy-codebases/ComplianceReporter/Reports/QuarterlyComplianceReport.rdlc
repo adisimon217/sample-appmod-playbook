@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition"
+        xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Textbox Name="ReportTitle">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>MAS Quarterly Compliance Report</Value>
+                <Style>
+                  <FontSize>16pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+          </Paragraph>
+        </Paragraphs>
+        <Top>0.5cm</Top>
+        <Left>2cm</Left>
+        <Height>1cm</Height>
+        <Width>17cm</Width>
+      </Textbox>
+
+      <Textbox Name="InstitutionInfo">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!ReportingEntity.Value &amp; " | " &amp; Parameters!Quarter.Value</Value>
+                <Style><FontSize>10pt</FontSize></Style>
+              </TextRun>
+            </TextRuns>
+          </Paragraph>
+        </Paragraphs>
+        <Top>1.5cm</Top>
+        <Left>2cm</Left>
+        <Height>0.6cm</Height>
+        <Width>17cm</Width>
+      </Textbox>
+
+      <!-- Compliance Checks Table -->
+      <Tablix Name="ComplianceChecksTable">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn><Width>4cm</Width></TablixColumn>
+            <TablixColumn><Width>2cm</Width></TablixColumn>
+            <TablixColumn><Width>2cm</Width></TablixColumn>
+            <TablixColumn><Width>2cm</Width></TablixColumn>
+            <TablixColumn><Width>2cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="HdrCategory"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Alert Category</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrSeverity"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Severity</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrTotal"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Total</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrResolved"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Resolved</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrPending"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Pending</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrStr"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Escalated to STR</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="Category"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!AlertCategory.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="Severity"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Severity.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="AlertCount"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!AlertCount.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="Resolved"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!ResolvedCount.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="Pending"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!PendingCount.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="StrCount"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!EscalatedToStrCount.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember><KeepWithGroup>After</KeepWithGroup></TablixMember>
+            <TablixMember><Group Name="ComplianceDetail" /></TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>ComplianceChecksDataSet</DataSetName>
+        <Top>3cm</Top>
+        <Left>2cm</Left>
+        <Height>2cm</Height>
+        <Width>15cm</Width>
+      </Tablix>
+
+      <!-- KYC Status Table -->
+      <Tablix Name="KycStatusTable">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="HdrKycStatus"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Status</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrRiskCat"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Risk Category</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrMerchCount"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Merchants</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrOldest"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Oldest Verification</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrNextReview"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Latest Review Due</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="KycStatus"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!VerificationStatus.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="RiskCat"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!RiskCategory.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="MerchCount"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!MerchantCount.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="OldestVerif"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!OldestVerification.Value, "yyyy-MM-dd")</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="NextReview"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!LatestReviewDue.Value, "yyyy-MM-dd")</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember><KeepWithGroup>After</KeepWithGroup></TablixMember>
+            <TablixMember><Group Name="KycDetail" /></TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>KycStatusDataSet</DataSetName>
+        <Top>7cm</Top>
+        <Left>2cm</Left>
+        <Height>2cm</Height>
+        <Width>15cm</Width>
+      </Tablix>
+    </ReportItems>
+    <Height>15cm</Height>
+  </Body>
+  <Page>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>2cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+  </Page>
+  <ReportParameters>
+    <ReportParameter Name="InstitutionCode"><DataType>String</DataType><Prompt>Institution Code</Prompt></ReportParameter>
+    <ReportParameter Name="ReportingEntity"><DataType>String</DataType><Prompt>Reporting Entity</Prompt></ReportParameter>
+    <ReportParameter Name="Quarter"><DataType>String</DataType><Prompt>Quarter</Prompt></ReportParameter>
+    <ReportParameter Name="GeneratedDate"><DataType>String</DataType><Prompt>Generated Date</Prompt></ReportParameter>
+  </ReportParameters>
+  <DataSources>
+    <DataSource Name="ComplianceReportingDS">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=SQLPROD01;Initial Catalog=ComplianceReporting</ConnectString>
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="ComplianceChecksDataSet">
+      <Fields>
+        <Field Name="AlertCategory"><DataField>AlertCategory</DataField></Field>
+        <Field Name="Severity"><DataField>Severity</DataField></Field>
+        <Field Name="AlertCount"><DataField>AlertCount</DataField></Field>
+        <Field Name="ResolvedCount"><DataField>ResolvedCount</DataField></Field>
+        <Field Name="PendingCount"><DataField>PendingCount</DataField></Field>
+        <Field Name="EscalatedToStrCount"><DataField>EscalatedToStrCount</DataField></Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="KycStatusDataSet">
+      <Fields>
+        <Field Name="VerificationStatus"><DataField>VerificationStatus</DataField></Field>
+        <Field Name="RiskCategory"><DataField>RiskCategory</DataField></Field>
+        <Field Name="MerchantCount"><DataField>MerchantCount</DataField></Field>
+        <Field Name="OldestVerification"><DataField>OldestVerification</DataField></Field>
+        <Field Name="LatestReviewDue"><DataField>LatestReviewDue</DataField></Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="AlertsSummaryDataSet">
+      <Fields>
+        <Field Name="AlertMonth"><DataField>AlertMonth</DataField></Field>
+        <Field Name="AlertCategory"><DataField>AlertCategory</DataField></Field>
+        <Field Name="TotalAlerts"><DataField>TotalAlerts</DataField></Field>
+        <Field Name="AvgResolutionHours"><DataField>AvgResolutionHours</DataField></Field>
+        <Field Name="FalsePositiveCount"><DataField>FalsePositiveCount</DataField></Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ThresholdBreachesDataSet">
+      <Fields>
+        <Field Name="MerchantID"><DataField>MerchantID</DataField></Field>
+        <Field Name="MerchantName"><DataField>MerchantName</DataField></Field>
+        <Field Name="ThresholdType"><DataField>ThresholdType</DataField></Field>
+        <Field Name="BreachCount"><DataField>BreachCount</DataField></Field>
+        <Field Name="TotalValue"><DataField>TotalValue</DataField></Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <rd:ReportID>b5e2a1f8-7c3d-4e6a-8b9f-1d2e3c4a5b6c</rd:ReportID>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+</Report>
