@@ -1,0 +1,55 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="BackOffice.Web.MasterPages.SiteMaster" %>
+<%@ Register TagPrefix="uc" TagName="NavigationMenu" Src="~/UserControls/NavigationMenu.ascx" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>BackOffice Operations Portal</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+            <Scripts>
+                <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.Core.js" />
+                <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQuery.js" />
+            </Scripts>
+        </telerik:RadScriptManager>
+
+        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" />
+
+        <div class="master-wrapper">
+            <div class="header-bar">
+                <div class="header-left">
+                    <img src="/Content/images/logo.png" alt="Financial Services" class="logo" />
+                    <span class="app-title">BackOffice Operations Portal</span>
+                </div>
+                <div class="header-right">
+                    <asp:Label ID="lblCurrentUser" runat="server" CssClass="user-info" />
+                    <asp:Label ID="lblEnvironment" runat="server" CssClass="env-badge" />
+                </div>
+            </div>
+
+            <div class="main-container">
+                <div class="nav-panel">
+                    <uc:NavigationMenu ID="NavMenu" runat="server" />
+                </div>
+                <div class="content-area">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                </div>
+            </div>
+
+            <div class="footer-bar">
+                <span>BackOffice v<%= System.Configuration.ConfigurationManager.AppSettings["ApplicationVersion"] %></span>
+                <span>|</span>
+                <span>Environment: <asp:Literal ID="litEnvironment" runat="server" /></span>
+                <span>|</span>
+                <span>&copy; <%= DateTime.Now.Year %> Financial Services Corp.</span>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
