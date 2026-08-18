@@ -1,0 +1,159 @@
+@{
+    ViewBag.Title = "Merchant Dashboard";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2>
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+            <small class="text-muted">@ViewBag.Merchant?.BusinessName</small>
+        </h2>
+        <hr />
+    </div>
+</div>
+
+@if (ViewBag.ChargebackWarning != null && (bool)ViewBag.ChargebackWarning)
+{
+    <div class="alert alert-danger">
+        <strong><i class="fas fa-exclamation-circle"></i> Warning:</strong>
+        Your chargeback ratio (@(((decimal)ViewBag.ChargebackRatio).ToString("F2"))%) exceeds the acceptable threshold (1.00%).
+        Please review your disputes and contact support if you need assistance.
+    </div>
+}
+
+@if (ViewBag.ProfileUpdateRequired != null && (bool)ViewBag.ProfileUpdateRequired)
+{
+    <div class="alert alert-warning">
+        <strong><i class="fas fa-user-edit"></i> Action Required:</strong>
+        Your profile information has not been updated in over a year. Please
+        <a href="@Url.Action("Profile", "Merchant")">update your profile</a> for compliance purposes.
+    </div>
+}
+
+<!-- Summary Cards -->
+<div class="row mb-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Monthly Volume</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@(((decimal)ViewBag.MonthlyVolume).ToString("C"))</div>
+                        <small class="text-muted">@ViewBag.MonthlyCount transactions</small>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Today's Volume</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@(((decimal)ViewBag.TodayVolume).ToString("C"))</div>
+                        <small class="text-muted">@ViewBag.TodayCount transactions</small>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar-day fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Approval Rate</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@(((decimal)ViewBag.ApprovalRate).ToString("F1"))%</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Open Disputes</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.OpenDisputeCount</div>
+                        <small class="text-muted">@(((decimal)ViewBag.DisputeAmount).ToString("C")) at risk</small>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Transactions Table -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Recent Transactions</h6>
+        <a href="@Url.Action("Index", "Transaction")" class="btn btn-sm btn-outline-primary">View All</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="recentTransactionsTable" width="100%">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Transaction ID</th>
+                        <th>Amount</th>
+                        <th>Card</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.RecentTransactions != null)
+                    {
+                        foreach (var txn in (IEnumerable<dynamic>)ViewBag.RecentTransactions)
+                        {
+                            var statusClass = txn.Status == "Approved" ? "success" :
+                                              txn.Status == "Declined" ? "danger" :
+                                              txn.Status == "Pending" ? "warning" : "secondary";
+                            <tr>
+                                <td>@txn.TransactionDate.ToString("MM/dd/yyyy HH:mm")</td>
+                                <td><a href="@Url.Action("Details", "Transaction", new { id = txn.TransactionId })">@txn.TransactionId</a></td>
+                                <td>@txn.Amount.ToString("C")</td>
+                                <td>@txn.CardType ****@txn.Last4Digits</td>
+                                <td><span class="badge badge-@statusClass">@txn.Status</span></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#recentTransactionsTable').DataTable({
+                "paging": false,
+                "searching": false,
+                "info": false,
+                "order": [[0, "desc"]]
+            });
+
+            // Auto-refresh dashboard every 60 seconds
+            setInterval(function () {
+                // TODO: Replace with AJAX call instead of full page reload
+                // For now, just reload the page (as requested by management)
+                location.reload();
+            }, 60000);
+        });
+    </script>
+}

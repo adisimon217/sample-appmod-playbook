@@ -1,0 +1,39 @@
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="jumbotron text-center">
+    <h1>Welcome to MerchantHub</h1>
+    <p class="lead">Your Payment Processing Portal</p>
+    @if (!Request.IsAuthenticated)
+    {
+        <a class="btn btn-primary btn-lg" href="@Url.Action("Login", "Account")">Sign In</a>
+    }
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-chart-line"></i> Real-time Analytics</h5>
+                <p class="card-text">Monitor your transaction volumes, approval rates, and revenue in real-time.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-file-alt"></i> Comprehensive Reports</h5>
+                <p class="card-text">Generate detailed statements, reconciliation reports, and compliance documents.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-shield-alt"></i> Dispute Management</h5>
+                <p class="card-text">Track and respond to chargebacks and disputes from a single dashboard.</p>
+            </div>
+        </div>
+    </div>
+</div>
