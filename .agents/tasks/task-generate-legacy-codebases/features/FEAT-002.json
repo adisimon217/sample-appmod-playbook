@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "feat",
   "description": "Generate PayGate (APP-001) synthetic legacy codebase - ASP.NET Web API on .NET Framework 4.6.2, ~200K LoC (representative subset of 3-5K lines). IIS-hosted, SQL Server 2019 Enterprise with Always On AG, TDE, 400+ stored procedures, API key auth for merchants, Windows Auth for admin. External Visa/Mastercard SFTP integration.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Create working/sample/legacy-codebases/PayGate/ directory with solution structure: PayGate.Api, PayGate.Core, PayGate.Data, PayGate.Security, PayGate.Integration, PayGate.Tests",
     "Create PayGate.sln solution file",
@@ -30,5 +30,5 @@
     "Verify web.config has both Windows Auth and API key auth configuration"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Generated 72 files totaling ~7,400 lines across 6 projects. All acceptance criteria verified: .sln references 6 projects, Web API targets .NET Framework 4.6.2, Web.config has dual auth (Windows Auth via location path for /api/admin + API key via DelegatingHandler), SFTP integration with WinSCP for Visa (TC33 fixed-width) and Mastercard (CSV), PGP encryption via gpg.exe, 20 stored procedures demonstrating PIVOT, CROSS APPLY, windowing functions (PERCENTILE_CONT, SUM OVER, ROW_NUMBER), CTEs, Always On AG setup with TDE. Repository pattern shows EF6 DbContext for non-critical reads and raw SqlCommand/SqlBulkCopy for performance-critical transaction inserts. Polly retry policies for transient SQL failures."
 }
