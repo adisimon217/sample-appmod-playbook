@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D4E5F6A7-B8C9-0123-4567-89ABCDEF0104}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ReconcEngine.Core</RootNamespace>
+    <AssemblyName>ReconcEngine.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Serilog, Version=2.12.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+      <HintPath>..\packages\Serilog.2.12.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.123.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper, Version=30.0.1.0, Culture=neutral, PublicKeyToken=8c4a6d608ce8e190">
+      <HintPath>..\packages\CsvHelper.30.0.1\lib\net48\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO" />
+    <Reference Include="System.Security" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IReconciliationEngine.cs" />
+    <Compile Include="Interfaces\ITransactionMatcher.cs" />
+    <Compile Include="Interfaces\ISettlementFileParser.cs" />
+    <Compile Include="Interfaces\IDiscrepancyDetector.cs" />
+    <Compile Include="Interfaces\IReportGenerator.cs" />
+    <Compile Include="Engine\ReconciliationEngine.cs" />
+    <Compile Include="Engine\TransactionMatcher.cs" />
+    <Compile Include="FileProcessing\SettlementFileParser.cs" />
+    <Compile Include="FileProcessing\PgpDecryptor.cs" />
+    <Compile Include="FileProcessing\FileFormatDetector.cs" />
+    <Compile Include="Analysis\DiscrepancyDetector.cs" />
+    <Compile Include="Reporting\CsvReportGenerator.cs" />
+    <Compile Include="Data\ReconcRepository.cs" />
+    <Compile Include="Data\TransactionRepository.cs" />
+    <Compile Include="Data\BatchRunRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReconcEngine.Models\ReconcEngine.Models.csproj">
+      <Project>{E5F6A7B8-C9D0-1234-5678-9ABCDEF01205}</Project>
+      <Name>ReconcEngine.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,34 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Generate PayGate (APP-001) synthetic legacy codebase - ASP.NET Web API on .NET Framework 4.6.2, ~200K LoC (representative subset of 3-5K lines). IIS-hosted, SQL Server 2019 Enterprise with Always On AG, TDE, 400+ stored procedures, API key auth for merchants, Windows Auth for admin. External Visa/Mastercard SFTP integration.",
+  "status": "completed",
+  "steps": [
+    "Create working/sample/legacy-codebases/PayGate/ directory with solution structure: PayGate.Api, PayGate.Core, PayGate.Data, PayGate.Security, PayGate.Integration, PayGate.Tests",
+    "Create PayGate.sln solution file",
+    "Create PayGate.Api.csproj (.NET Framework 4.6.2, Web API 2) with web.config containing Windows Auth for /admin endpoints, API key auth via custom DelegatingHandler, connection strings to PaymentsDB, TLS 1.2 enforcement settings",
+    "Create API controllers: TransactionController (processes payments, 50K/hour at peak), SettlementController, MerchantAuthController (API key validation), AdminController (Windows Auth), HealthCheckController. Show high-throughput patterns, transaction processing logic",
+    "Create PayGate.Core.csproj with domain models (Transaction, Settlement, Merchant, PaymentMethod), services (PaymentProcessingService, SettlementService, MerchantValidationService), and business rules",
+    "Create PayGate.Data.csproj with repository pattern using both EF6 and raw ADO.NET for performance-critical paths. Include PayGateDbContext, TransactionRepository (uses raw SqlCommand for bulk inserts), SettlementRepository",
+    "Create PayGate.Security.csproj with API key validation, Windows Auth helpers, TDE-related configuration, encryption utilities",
+    "Create PayGate.Integration.csproj with SFTP client for Visa/Mastercard settlement file exchange, file format parsers (CSV, fixed-width), PGP encryption/decryption stubs",
+    "Create SQL scripts folder with representative stored procedures (20-30 of the 400+) covering transaction processing, settlement matching, merchant management, reporting aggregations. Include Always On AG setup scripts",
+    "Create packages.config files with NuGet refs: EntityFramework 6.4.4, Newtonsoft.Json, WinSCP (SFTP), Polly (resilience), System.Data.SqlClient"
+  ],
+  "acceptance_criteria": [
+    "PayGate.sln exists with all projects referenced",
+    "Web API project targets .NET Framework 4.6.2",
+    "web.config shows dual auth: API key + Windows Auth sections",
+    "SFTP integration code references Visa/Mastercard settlement patterns",
+    "SQL scripts include representative stored procedures demonstrating complexity (PIVOT, CROSS APPLY, windowing functions)",
+    "Repository pattern shows both EF6 and raw ADO.NET (performance-critical paths)",
+    "packages.config present with appropriate NuGet references"
+  ],
+  "verification": [
+    "Verify directory structure exists with all project folders",
+    "Verify .sln file properly references all projects",
+    "Verify web.config has both Windows Auth and API key auth configuration"
+  ],
+  "blocked_reason": null,
+  "findings": "Generated 72 files totaling ~7,400 lines across 6 projects. All acceptance criteria verified: .sln references 6 projects, Web API targets .NET Framework 4.6.2, Web.config has dual auth (Windows Auth via location path for /api/admin + API key via DelegatingHandler), SFTP integration with WinSCP for Visa (TC33 fixed-width) and Mastercard (CSV), PGP encryption via gpg.exe, 20 stored procedures demonstrating PIVOT, CROSS APPLY, windowing functions (PERCENTILE_CONT, SUM OVER, ROW_NUMBER), CTEs, Always On AG setup with TDE. Repository pattern shows EF6 DbContext for non-critical reads and raw SqlCommand/SqlBulkCopy for performance-critical transaction inserts. Polly retry policies for transient SQL failures."
+}

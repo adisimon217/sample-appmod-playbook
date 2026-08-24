@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MerchantHubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MH_Merchants">
+          <Key>
+            <PropertyRef Name="MerchantId" />
+          </Key>
+          <Property Name="MerchantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusinessName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DBA" Type="nvarchar" MaxLength="200" />
+          <Property Name="EIN" Type="varchar" MaxLength="11" />
+          <Property Name="MerchantNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Website" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tier" Type="varchar" MaxLength="50" />
+          <Property Name="MCC" Type="char" MaxLength="4" />
+          <Property Name="MonthlyVolumeLimit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SingleTransactionLimit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProcessingFeeRate" Type="decimal" Precision="5" Scale="4" />
+          <Property Name="ContractStartDate" Type="datetime2" Nullable="false" />
+          <Property Name="ContractEndDate" Type="datetime2" />
+          <Property Name="CreatedDate" Type="datetime2" Nullable="false" />
+          <Property Name="LastProfileUpdate" Type="datetime2" Nullable="false" />
+          <Property Name="SuspendedDate" Type="datetime2" />
+          <Property Name="SuspensionReason" Type="nvarchar" MaxLength="500" />
+          <Property Name="SuspendedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime2" />
+        </EntityType>
+        <EntityType Name="MH_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchantId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime2" />
+          <Property Name="LastLoginIP" Type="varchar" MaxLength="45" />
+          <Property Name="FailedLoginAttempts" Type="int" Nullable="false" />
+          <Property Name="LockoutEnd" Type="datetime2" />
+          <Property Name="PasswordResetToken" Type="nvarchar" MaxLength="100" />
+          <Property Name="PasswordResetExpiry" Type="datetime2" />
+          <Property Name="CreatedDate" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MH_Transactions">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchantId" Type="int" Nullable="false" />
+          <Property Name="ReferenceNumber" Type="varchar" MaxLength="50" />
+          <Property Name="AuthorizationCode" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RefundAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NetAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Currency" Type="char" MaxLength="3" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CardType" Type="varchar" MaxLength="20" />
+          <Property Name="Last4Digits" Type="char" MaxLength="4" />
+          <Property Name="CardFingerprint" Type="varchar" MaxLength="64" />
+          <Property Name="EntryMode" Type="varchar" MaxLength="20" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CustomerEmail" Type="nvarchar" MaxLength="200" />
+          <Property Name="BatchNumber" Type="varchar" MaxLength="50" />
+          <Property Name="TransactionDate" Type="datetime2" Nullable="false" />
+          <Property Name="SettlementDate" Type="datetime2" />
+          <Property Name="CreatedDate" Type="datetime2" Nullable="false" />
+          <Property Name="DeclineReason" Type="varchar" MaxLength="50" />
+          <Property Name="ResponseCode" Type="varchar" MaxLength="20" />
+          <Property Name="TerminalId" Type="varchar" MaxLength="50" />
+          <Property Name="PayGateTransactionId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="MH_Disputes">
+          <Key>
+            <PropertyRef Name="DisputeId" />
+          </Key>
+          <Property Name="DisputeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchantId" Type="int" Nullable="false" />
+          <Property Name="TransactionId" Type="bigint" Nullable="false" />
+          <Property Name="CaseNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ReasonCode" Type="varchar" MaxLength="50" />
+          <Property Name="ReasonDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CardType" Type="varchar" MaxLength="20" />
+          <Property Name="Last4Digits" Type="char" MaxLength="4" />
+          <Property Name="FiledDate" Type="datetime2" Nullable="false" />
+          <Property Name="ResponseDeadline" Type="datetime2" Nullable="false" />
+          <Property Name="RespondedDate" Type="datetime2" />
+          <Property Name="ResolvedDate" Type="datetime2" />
+          <Property Name="MerchantResponse" Type="nvarchar(max)" />
+          <Property Name="Resolution" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime2" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MH_AuditLog">
+          <Key>
+            <PropertyRef Name="AuditId" />
+          </Key>
+          <Property Name="AuditId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntityType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EntityId" Type="int" Nullable="false" />
+          <Property Name="Action" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Nullable="false" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="MH_MonthlyStatements">
+          <Key>
+            <PropertyRef Name="StatementId" />
+          </Key>
+          <Property Name="StatementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MerchantId" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Month" Type="int" Nullable="false" />
+          <Property Name="StatementDate" Type="datetime2" Nullable="false" />
+          <Property Name="TotalVolume" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalTransactions" Type="int" Nullable="false" />
+          <Property Name="TotalFees" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NetSettlement" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ChargebackAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ChargebackCount" Type="int" Nullable="false" />
+          <Property Name="RefundAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RefundCount" Type="int" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="500" />
+          <Property Name="GeneratedDate" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MH_Users_MH_Merchants">
+          <End Role="MH_Merchants" Type="Self.MH_Merchants" Multiplicity="1" />
+          <End Role="MH_Users" Type="Self.MH_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MH_Merchants">
+              <PropertyRef Name="MerchantId" />
+            </Principal>
+            <Dependent Role="MH_Users">
+              <PropertyRef Name="MerchantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MH_Transactions_MH_Merchants">
+          <End Role="MH_Merchants" Type="Self.MH_Merchants" Multiplicity="1" />
+          <End Role="MH_Transactions" Type="Self.MH_Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MH_Merchants">
+              <PropertyRef Name="MerchantId" />
+            </Principal>
+            <Dependent Role="MH_Transactions">
+              <PropertyRef Name="MerchantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MH_Disputes_MH_Merchants">
+          <End Role="MH_Merchants" Type="Self.MH_Merchants" Multiplicity="1" />
+          <End Role="MH_Disputes" Type="Self.MH_Disputes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MH_Merchants">
+              <PropertyRef Name="MerchantId" />
+            </Principal>
+            <Dependent Role="MH_Disputes">
+              <PropertyRef Name="MerchantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MH_Disputes_MH_Transactions">
+          <End Role="MH_Transactions" Type="Self.MH_Transactions" Multiplicity="1" />
+          <End Role="MH_Disputes" Type="Self.MH_Disputes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MH_Transactions">
+              <PropertyRef Name="TransactionId" />
+            </Principal>
+            <Dependent Role="MH_Disputes">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MerchantHubModelStoreContainer">
+          <EntitySet Name="MH_Merchants" EntityType="Self.MH_Merchants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MH_Users" EntityType="Self.MH_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MH_Transactions" EntityType="Self.MH_Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MH_Disputes" EntityType="Self.MH_Disputes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MH_AuditLog" EntityType="Self.MH_AuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MH_MonthlyStatements" EntityType="Self.MH_MonthlyStatements" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MH_Users_MH_Merchants" Association="Self.FK_MH_Users_MH_Merchants">
+            <End Role="MH_Merchants" EntitySet="MH_Merchants" />
+            <End Role="MH_Users" EntitySet="MH_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MH_Transactions_MH_Merchants" Association="Self.FK_MH_Transactions_MH_Merchants">
+            <End Role="MH_Merchants" EntitySet="MH_Merchants" />
+            <End Role="MH_Transactions" EntitySet="MH_Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MH_Disputes_MH_Merchants" Association="Self.FK_MH_Disputes_MH_Merchants">
+            <End Role="MH_Merchants" EntitySet="MH_Merchants" />
+            <End Role="MH_Disputes" EntitySet="MH_Disputes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MH_Disputes_MH_Transactions" Association="Self.FK_MH_Disputes_MH_Transactions">
+            <End Role="MH_Transactions" EntitySet="MH_Transactions" />
+            <End Role="MH_Disputes" EntitySet="MH_Disputes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MerchantHubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Merchant">
+          <Key>
+            <PropertyRef Name="MerchantId" />
+          </Key>
+          <Property Name="MerchantId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessName" Type="String" MaxLength="200" Nullable="false" />
+          <Property Name="DBA" Type="String" MaxLength="200" />
+          <Property Name="EIN" Type="String" MaxLength="11" />
+          <Property Name="MerchantNumber" Type="String" MaxLength="20" />
+          <Property Name="Status" Type="String" MaxLength="50" Nullable="false" />
+          <Property Name="Tier" Type="String" MaxLength="50" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_MH_Users_MH_Merchants" FromRole="MH_Merchants" ToRole="MH_Users" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_MH_Transactions_MH_Merchants" FromRole="MH_Merchants" ToRole="MH_Transactions" />
+          <NavigationProperty Name="Disputes" Relationship="Self.FK_MH_Disputes_MH_Merchants" FromRole="MH_Merchants" ToRole="MH_Disputes" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MerchantId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Merchant" Relationship="Self.FK_MH_Users_MH_Merchants" FromRole="MH_Users" ToRole="MH_Merchants" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MerchantId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Merchant" Relationship="Self.FK_MH_Transactions_MH_Merchants" FromRole="MH_Transactions" ToRole="MH_Merchants" />
+          <NavigationProperty Name="Disputes" Relationship="Self.FK_MH_Disputes_MH_Transactions" FromRole="MH_Transactions" ToRole="MH_Disputes" />
+        </EntityType>
+        <EntityType Name="Dispute">
+          <Key>
+            <PropertyRef Name="DisputeId" />
+          </Key>
+          <Property Name="DisputeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MerchantId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionId" Type="Int64" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" Nullable="false" />
+          <Property Name="FiledDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Merchant" Relationship="Self.FK_MH_Disputes_MH_Merchants" FromRole="MH_Disputes" ToRole="MH_Merchants" />
+          <NavigationProperty Name="Transaction" Relationship="Self.FK_MH_Disputes_MH_Transactions" FromRole="MH_Disputes" ToRole="MH_Transactions" />
+        </EntityType>
+        <Association Name="FK_MH_Users_MH_Merchants">
+          <End Role="MH_Merchants" Type="Self.Merchant" Multiplicity="1" />
+          <End Role="MH_Users" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_MH_Transactions_MH_Merchants">
+          <End Role="MH_Merchants" Type="Self.Merchant" Multiplicity="1" />
+          <End Role="MH_Transactions" Type="Self.Transaction" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_MH_Disputes_MH_Merchants">
+          <End Role="MH_Merchants" Type="Self.Merchant" Multiplicity="1" />
+          <End Role="MH_Disputes" Type="Self.Dispute" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_MH_Disputes_MH_Transactions">
+          <End Role="MH_Transactions" Type="Self.Transaction" Multiplicity="1" />
+          <End Role="MH_Disputes" Type="Self.Dispute" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MerchantHubEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Merchants" EntityType="Self.Merchant" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="Disputes" EntityType="Self.Dispute" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MerchantHubModelStoreContainer" CdmEntityContainer="MerchantHubEntities">
+          <EntitySetMapping Name="Merchants">
+            <EntityTypeMapping TypeName="MerchantHubModel.Merchant">
+              <MappingFragment StoreEntitySet="MH_Merchants">
+                <ScalarProperty Name="MerchantId" ColumnName="MerchantId" />
+                <ScalarProperty Name="BusinessName" ColumnName="BusinessName" />
+                <ScalarProperty Name="DBA" ColumnName="DBA" />
+                <ScalarProperty Name="EIN" ColumnName="EIN" />
+                <ScalarProperty Name="MerchantNumber" ColumnName="MerchantNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Tier" ColumnName="Tier" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MerchantHubModel.User">
+              <MappingFragment StoreEntitySet="MH_Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MerchantId" ColumnName="MerchantId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="MerchantHubModel.Transaction">
+              <MappingFragment StoreEntitySet="MH_Transactions">
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="MerchantId" ColumnName="MerchantId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disputes">
+            <EntityTypeMapping TypeName="MerchantHubModel.Dispute">
+              <MappingFragment StoreEntitySet="MH_Disputes">
+                <ScalarProperty Name="DisputeId" ColumnName="DisputeId" />
+                <ScalarProperty Name="MerchantId" ColumnName="MerchantId" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FiledDate" ColumnName="FiledDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <Diagrams>
+      <Diagram DiagramId="c9e8d7f6a5b4c3d2" Name="MerchantHubModel">
+        <EntityTypeShape EntityType="MerchantHubModel.Merchant" Width="2" PointX="1" PointY="1" />
+        <EntityTypeShape EntityType="MerchantHubModel.User" Width="2" PointX="4" PointY="1" />
+        <EntityTypeShape EntityType="MerchantHubModel.Transaction" Width="2" PointX="4" PointY="4" />
+        <EntityTypeShape EntityType="MerchantHubModel.Dispute" Width="2" PointX="7" PointY="4" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

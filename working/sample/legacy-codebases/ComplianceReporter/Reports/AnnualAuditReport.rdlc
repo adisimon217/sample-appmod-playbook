@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition"
+        xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Textbox Name="ReportTitle">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>MAS Annual Audit Report</Value>
+                <Style>
+                  <FontSize>18pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+          </Paragraph>
+        </Paragraphs>
+        <Top>0.5cm</Top>
+        <Left>2cm</Left>
+        <Height>1cm</Height>
+        <Width>17cm</Width>
+      </Textbox>
+
+      <Textbox Name="SubTitle">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Payment Services Act - Annual Compliance Report | " &amp; Parameters!ReportingEntity.Value</Value>
+                <Style><FontSize>11pt</FontSize></Style>
+              </TextRun>
+            </TextRuns>
+          </Paragraph>
+        </Paragraphs>
+        <Top>1.5cm</Top>
+        <Left>2cm</Left>
+        <Height>0.6cm</Height>
+        <Width>17cm</Width>
+      </Textbox>
+
+      <Textbox Name="LicenseInfo">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Institution Code: " &amp; Parameters!InstitutionCode.Value &amp; " | Report Version: " &amp; Parameters!ReportVersion.Value</Value>
+                <Style><FontSize>9pt</FontSize><Color>Gray</Color></Style>
+              </TextRun>
+            </TextRuns>
+          </Paragraph>
+        </Paragraphs>
+        <Top>2.2cm</Top>
+        <Left>2cm</Left>
+        <Height>0.6cm</Height>
+        <Width>17cm</Width>
+      </Textbox>
+
+      <!-- Annual Transaction Summary Table -->
+      <Tablix Name="AnnualTransactionTable">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn><Width>2cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>4cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>4cm</Width></TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="HdrMonth"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Month</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrTxnCount"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Transactions</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrTxnValue"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Total Value (SGD)</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrActiveMerch"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Active Merchants</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrIntlValue"><Paragraphs><Paragraph><TextRuns><TextRun><Value>International Value</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="Month"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!TransactionMonth.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="TxnCount"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!TransactionCount.Value, "N0")</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="TxnValue"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!TransactionValue.Value, "N2")</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="ActiveMerch"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!ActiveMerchants.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="IntlValue"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!InternationalValue.Value, "N2")</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember><KeepWithGroup>After</KeepWithGroup></TablixMember>
+            <TablixMember><Group Name="AnnualDetail" /></TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>AnnualTransactionSummaryDataSet</DataSetName>
+        <Top>4cm</Top>
+        <Left>2cm</Left>
+        <Height>2cm</Height>
+        <Width>16cm</Width>
+      </Tablix>
+
+      <!-- STR Filings Section -->
+      <Textbox Name="StrSectionHeader">
+        <CanGrow>true</CanGrow>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Suspicious Transaction Reports (STR) Filed</Value>
+                <Style><FontSize>12pt</FontSize><FontWeight>Bold</FontWeight></Style>
+              </TextRun>
+            </TextRuns>
+          </Paragraph>
+        </Paragraphs>
+        <Top>10cm</Top>
+        <Left>2cm</Left>
+        <Height>0.8cm</Height>
+        <Width>17cm</Width>
+      </Textbox>
+
+      <Tablix Name="StrFilingsTable">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>2cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+            <TablixColumn><Width>3cm</Width></TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="HdrFilingDate"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Filing Date</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrReportCat"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Category</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrFilingStatus"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Status</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrRefNo"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Reference</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrMerchant"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Merchant</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="HdrAmount"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Amount</Value><Style><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="FilingDate"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!FilingDate.Value, "yyyy-MM-dd")</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="ReportCat"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!ReportCategory.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="FilingStatus"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!FilingStatus.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="RefNo"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!ReferenceNumber.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="Merchant"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!MerchantName.Value</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="Amount"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Format(Fields!InvolvedAmount.Value, "N2")</Value></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember><KeepWithGroup>After</KeepWithGroup></TablixMember>
+            <TablixMember><Group Name="StrDetail" /></TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>StrFilingsDataSet</DataSetName>
+        <Top>11cm</Top>
+        <Left>2cm</Left>
+        <Height>2cm</Height>
+        <Width>17cm</Width>
+      </Tablix>
+    </ReportItems>
+    <Height>20cm</Height>
+  </Body>
+  <Page>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>2cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+  </Page>
+  <ReportParameters>
+    <ReportParameter Name="InstitutionCode"><DataType>String</DataType><Prompt>Institution Code</Prompt></ReportParameter>
+    <ReportParameter Name="ReportingEntity"><DataType>String</DataType><Prompt>Reporting Entity</Prompt></ReportParameter>
+    <ReportParameter Name="GeneratedDate"><DataType>String</DataType><Prompt>Generated Date</Prompt></ReportParameter>
+    <ReportParameter Name="ReportVersion"><DataType>String</DataType><Prompt>Report Version</Prompt></ReportParameter>
+  </ReportParameters>
+  <DataSources>
+    <DataSource Name="ComplianceReportingDS">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=SQLPROD01;Initial Catalog=ComplianceReporting</ConnectString>
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="AnnualTransactionSummaryDataSet">
+      <Fields>
+        <Field Name="TransactionMonth"><DataField>TransactionMonth</DataField></Field>
+        <Field Name="TransactionCount"><DataField>TransactionCount</DataField></Field>
+        <Field Name="TransactionValue"><DataField>TransactionValue</DataField></Field>
+        <Field Name="ActiveMerchants"><DataField>ActiveMerchants</DataField></Field>
+        <Field Name="InternationalValue"><DataField>InternationalValue</DataField></Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="MerchantPortfolioDataSet">
+      <Fields>
+        <Field Name="MerchantCategory"><DataField>MerchantCategory</DataField></Field>
+        <Field Name="RiskRating"><DataField>RiskRating</DataField></Field>
+        <Field Name="MerchantCount"><DataField>MerchantCount</DataField></Field>
+        <Field Name="ActiveCount"><DataField>ActiveCount</DataField></Field>
+        <Field Name="NewThisYear"><DataField>NewThisYear</DataField></Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ComplianceIncidentsDataSet">
+      <Fields>
+        <Field Name="AlertCategory"><DataField>AlertCategory</DataField></Field>
+        <Field Name="Severity"><DataField>Severity</DataField></Field>
+        <Field Name="IncidentQuarter"><DataField>IncidentQuarter</DataField></Field>
+        <Field Name="IncidentCount"><DataField>IncidentCount</DataField></Field>
+        <Field Name="Resolved"><DataField>Resolved</DataField></Field>
+        <Field Name="EscalatedCount"><DataField>EscalatedCount</DataField></Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="StrFilingsDataSet">
+      <Fields>
+        <Field Name="FilingDate"><DataField>FilingDate</DataField></Field>
+        <Field Name="ReportCategory"><DataField>ReportCategory</DataField></Field>
+        <Field Name="FilingStatus"><DataField>FilingStatus</DataField></Field>
+        <Field Name="ReferenceNumber"><DataField>ReferenceNumber</DataField></Field>
+        <Field Name="MerchantName"><DataField>MerchantName</DataField></Field>
+        <Field Name="InvolvedAmount"><DataField>InvolvedAmount</DataField></Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="RegulatoryActionsDataSet">
+      <Fields>
+        <Field Name="ActionDate"><DataField>ActionDate</DataField></Field>
+        <Field Name="ActionType"><DataField>ActionType</DataField></Field>
+        <Field Name="ActionDescription"><DataField>ActionDescription</DataField></Field>
+        <Field Name="ResolutionStatus"><DataField>ResolutionStatus</DataField></Field>
+        <Field Name="ResolutionDate"><DataField>ResolutionDate</DataField></Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <rd:ReportID>c8f1a2b3-4d5e-6f7a-8b9c-0d1e2f3a4b5c</rd:ReportID>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+</Report>
