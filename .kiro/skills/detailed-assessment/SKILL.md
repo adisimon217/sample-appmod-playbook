@@ -71,33 +71,45 @@ Use the `excel-analysis` skill to read inventory data from `working/{PROJECT}/10
 | 12. Database | Feasibility | ATX SQL eligibility, blockers |
 | Data gaps | Feasibility | Targeted follow-up questions per app |
 
-**If ATX Comprehensive Codebase Analysis output is available** (recommended):
+**If ATX analysis output is available** (recommended):
 
-Check if output exists at `working/{PROJECT}/200-mod-feasibility/{APP_NAME}-codebase-analysis/`. If available, use it as the primary source - it provides high-confidence answers for architecture, dependencies, code quality, DB access patterns, and integration points. This significantly reduces the number of gaps requiring follow-up.
+Check for existing output under `working/{PROJECT}/200-mod-feasibility/{APP_NAME}-*-analysis/`. The assessment draws on a chain of AWS Transform managed analyses; use whichever are present as the primary source:
 
-When pre-populating from codebase analysis:
-- Mark answers derived from codebase analysis with a clipboard icon (carried forward from analysis)
+| Analysis | Job | Feeds |
+|----------|-----|-------|
+| Comprehensive Codebase Analysis | `AWS/comprehensive-codebase-analysis` | Architecture, dependencies, code quality, DB access patterns, integration points |
+| Modernization Readiness (MODA) | `AWS/modernization-readiness-analysis` | Cloud-native maturity scores, pathway detection, effort seeding |
+| Agentic Readiness (ARA) | `AWS/agentic-readiness-analysis` | AI-readiness scoring (5 pillars), agent use-case signals |
+| Security scan | Continuous Modernization `--type security` | CVE inventory, insecure patterns (feeds security + compliance) |
+
+Parse the `*-report.json` artifacts (authoritative), and cite the `*-report.md` for narrative evidence. These provide high-confidence answers and significantly reduce the gaps requiring follow-up.
+
+When pre-populating from analysis output:
+- Mark answers derived from analysis with a clipboard icon (carried forward from analysis)
 - Mark remaining gaps with a warning icon for follow-up
 - Expect significantly fewer gaps compared to inventory-only pre-population
 
-If codebase analysis has not been run but source code is accessible, recommend running it:
+If the analyses have not been run but source code is accessible, recommend running the chain:
 
-> **Recommended: ATX Comprehensive Codebase Analysis**
+> **Recommended: run the AWS Transform analysis chain**
 >
-> Source code is available for {APP_NAME}. Running the comprehensive codebase analysis before questionnaire completion will provide measured metrics (actual LOC, dependency maps, specific blockers) that reduce interview time.
+> Source code is available for {APP_NAME}. Running the managed analyses before questionnaire completion provides measured metrics (actual LOC, dependency maps, readiness scores, CVEs) that reduce interview time and feed the AI-readiness, security, and compliance sections.
 >
-> To run: copy `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml` to `working/{PROJECT}/200-mod-feasibility/atxconfig-coda.yaml` and execute from that directory:
-> ```
-> atx custom def exec -t -n AWS/comprehensive-codebase-analysis -g file://atxconfig-coda.yaml -p <repo-path>
-> ```
->
-> Would you like to run codebase analysis first, or proceed with inventory-based pre-population?
+> Would you like to run the analysis chain first, or proceed with inventory-based pre-population?
+
+If the user opts to run it, copy the configs for them (do not ask them to copy them). Copy `.kiro/skills/feasibility-analysis/references/atxconfig-coda.yaml` to `working/{PROJECT}/200-mod-feasibility/atxconfig-coda.yaml`, then execute the chain from that directory (all read-only, 5-30 min/repo):
+```
+atx custom def exec -t -n AWS/comprehensive-codebase-analysis   -g file://atxconfig-coda.yaml -p <repo-path>
+atx custom def exec -t -n AWS/modernization-readiness-analysis   -p <repo-path>
+atx custom def exec -t -n AWS/agentic-readiness-analysis         -p <repo-path>
+```
+For the security scan, complete the one-time setup first (`atx ct setup security-agent`), then run the `security` analysis type via Continuous Modernization. Note: `security` is not available in `ca-central-1`, `eu-west-2`, `ap-northeast-2`.
 
 #### Path B - Front-loaded (no prior phases)
 
 Copy the blank questionnaire template directly:
 1. Copy `references/300-App-Questionnaire.md` to `working/{PROJECT}/300-detailed-assessment/{PROJECT}-{APP}-Questionnaire.md` for each application.
-2. If source code is accessible, recommend running ATX Comprehensive Codebase Analysis (same process as above) and use output to pre-populate where possible.
+2. If source code is accessible, recommend running the AWS Transform analysis chain (same process as above) and use output to pre-populate where possible.
 3. Mark all fields as requiring input (no inventory data available to carry forward).
 
 #### Questionnaire walkthrough
@@ -130,6 +142,16 @@ Produce a single consolidated document containing:
 - Consolidated discussion points across all apps
 
 Output as: `working/{PROJECT}/300-detailed-assessment/{PROJECT}-Detailed-Assessment.md`
+
+**Compliance gap analysis (if a security scan and MODA/ARA output exist):**
+
+Read the crosswalk rules from `references/compliance-crosswalk.md`. Map the findings in the `*-report.json` artifacts to SOC 2 / PCI-DSS / ISO 27001 controls and produce the pre/post compliance gap table. Include the mandatory assessment-grade caveat. Fold the table into the consolidated assessment (or emit as `working/{PROJECT}/300-detailed-assessment/{PROJECT}-Compliance-Gaps.md` if the customer wants it standalone).
+
+**Financial business case (if Phase 100 cost columns are populated):**
+
+Read the modelling rules from `references/financial-model.md`. Build current-state TCO from the inventory cost fields, estimate target-state cost (via the `pricing` API for the recommended architecture), derive effort/investment, savings, cost of inaction, and ROI/payback. State every assumption in a parameters block and attach the mandatory caveats. This is a hard prerequisite for the executive readout; if cost columns are blank, flag the gap and request the data rather than fabricating figures.
+
+Output as: `working/{PROJECT}/300-detailed-assessment/{PROJECT}-Business-Case.md`
 
 **Architecture working docs:**
 
